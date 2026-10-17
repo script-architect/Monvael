@@ -1,0 +1,226 @@
+/* --- MONVAEL CLEAN EMERALD INSTITUTIONAL STYLING SYSTEM --- */
+
+:root {
+    --bg-workspace: #f4f6f8;       /* Clean executive slate background */
+    --emerald-primary: #0b6623;   /* Rich banking emerald green for money/growth */
+    --emerald-light: #eaf4ec;     /* Soft luxury green accent background */
+    --navy-text-core: #1a2536;    /* Highly professional deep corporate ink text */
+    --text-muted: #64748b;        /* Subtle gray description vectors */
+    --white-surface: #ffffff;    /* Absolute solid pure surface layers */
+    --border-clean: #e2e8f0;     /* Extremely lightweight grid framing lines */
+    --danger-rose: #be123c;       /* Muted authoritative red for capital loss alerts */
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-workspace);
+    margin: 0;
+    color: var(--navy-text-core);
+    -webkit-font-smoothing: antialiased;
+}
+
+.monvael-suite {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* Global Top Corporate Header Fix */
+.suite-top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--white-surface);
+    padding: 20px 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-clean);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    margin-bottom: 25px;
+}
+
+.brand-identity { display: flex; align-items: center; gap: 15px; }
+.app-logo { width: 44px; height: 44px; object-fit: contain; }
+
+.brand-text h2 { margin: 0; font-size: 22px; font-weight: 700; color: var(--navy-text-core); }
+.brand-text p { margin: 2px 0 0 0; font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+/* Dynamic Layout Panel Dropdowns */
+.global-action-controls { display: flex; gap: 12px; }
+
+.btn-toggle-panel {
+    background: var(--white-surface);
+    color: var(--navy-text-core);
+    border: 1px solid var(--border-clean);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-toggle-panel:hover {
+    background: #f8fafc;
+    border-color: var(--text-muted);
+}
+
+/* On-Demand Expandable Panels Styling Layout */
+.expandable-panel {
+    margin-bottom: 25px;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-inner-card {
+    background: var(--white-surface);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--border-clean);
+}
+.panel-inner-card h3 { margin: 0; font-size: 16px; font-weight: 700; color: var(--navy-text-core); }
+.panel-inner-card p { margin: 5px 0 20px 0; font-size: 13px; color: var(--text-muted); }
+
+.budget-input-wrapper { display: flex; align-items: center; gap: 15px; }
+.budget-input-wrapper label { font-size: 14px; font-weight: 600; }
+.budget-input-wrapper input { padding: 10px 14px; font-size: 16px; font-weight: 700; width: 200px; }
+
+/* Custom Clean Native Bar Graph Matrix Grid */
+.raw-bar-graph-matrix {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border-clean);
+    height: 140px;
+    align-items: flex-end;
+}
+
+.graph-column { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+.bar-fill-track { background: #e2e8f0; width: 32px; height: 100px; border-radius: 4px; display: flex; align-items: flex-end; overflow: hidden; }
+.bar-fill-core { background: var(--emerald-primary); width: 100%; height: 0%; transition: height 0.5s ease-in-out; }
+.column-name { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-top: 8px; text-align: center; }
+
+/* Operational Status Blocks Panels */
+.summary-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.summary-tile {
+    background: var(--white-surface);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-clean);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tile-desc { font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
+.tile-number { font-size: 24px; font-weight: 700; }
+
+.alert-outflow-tile { border-left: 4px solid var(--danger-rose); }
+.safety-runway-tile { border-left: 4px solid var(--emerald-primary); }
+
+/* Double Column Configuration Grid */
+.workspace-split-core {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 25px;
+}
+
+.workspace-card {
+    background: var(--white-surface);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--border-clean);
+}
+
+.card-heading-border {
+    border-bottom: 1px solid var(--border-clean);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.card-heading-border h3 { margin: 0; font-size: 16px; font-weight: 700; color: var(--navy-text-core); }
+
+.display-flex-between { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+.display-flex-between input { width: 55%; padding: 8px 12px; font-size: 13px; }
+
+.input-field-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.input-field-group label { font-size: 13px; font-weight: 600; color: var(--navy-text-core); }
+
+.input-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+input, select {
+    padding: 10px 14px;
+    font-size: 14px;
+    border: 1px solid var(--border-clean);
+    border-radius: 6px;
+    outline: none;
+    color: var(--navy-text-core);
+    background-color: #fafafa;
+}
+input:focus, select:focus {
+    background-color: var(--white-surface);
+    border-color: var(--emerald-primary);
+}
+
+.btn-submit-wealth {
+    background: var(--emerald-primary);
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+.btn-submit-wealth:hover { opacity: 0.9; }
+
+/* Ledger Row Rendering Ecosystem */
+.ledger-data-stream { padding: 0; margin: 0; list-style: none; }
+
+.ledger-row {
+    background: #f8fafc;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border-clean);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row-details h4 { margin: 0; font-size: 14px; font-weight: 600; color: var(--navy-text-core); }
+.row-meta-tags { font-size: 12px; color: var(--text-muted); margin-top: 4px; display: flex; gap: 10px; }
+
+.row-right-pack { display: flex; align-items: center; gap: 15px; }
+.row-cash { font-size: 15px; font-weight: 700; color: var(--navy-text-core); }
+
+.btn-delete-ledger-entry {
+    background: transparent;
+    color: var(--danger-rose);
+    border: 1px solid #fda4af;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-delete-ledger-entry:hover { background: var(--danger-rose); color: white; border-color: var(--danger-rose); }
+
+/* Hidden utility state toggle controller */
+.hidden { display: none !important; }

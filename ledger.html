@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-transparent p-1 font-sans">
+
+    <!-- Configurable Dynamic Parameter Controls & Metrics Band Section Wrapper -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+        
+        <!-- Dynamic Spending Limit Configurator Module -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="input-limit" class="text-xs font-bold uppercase tracking-wider text-slate-500">Monthly Allocation Control</label>
+                    <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded font-mono text-slate-600">Manual Setup</span>
+                </div>
+                <p class="text-xs text-slate-400 mb-3">Adjust parameters to calibrate core liquidity balances.</p>
+            </div>
+            <div class="relative mt-2">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 font-medium text-sm">₹</span>
+                <input type="number" id="input-limit" value="50000" class="w-full bg-slate-50 border border-slate-200 rounded-lg pl-7 pr-3 py-2 text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white text-sm transition-all">
+            </div>
+        </div>
+
+        <!-- Metrics Display Card: Total Configured Limit -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1">Total Configured Limit</span>
+            <div class="mt-4">
+                <span class="text-2xl font-black text-slate-900 tracking-tight">₹<span id="metric-limit">50,000</span></span>
+                <span class="text-[10px] text-slate-400 block mt-1">Global allocated operational ceiling</span>
+            </div>
+        </div>
+
+        <!-- Metrics Display Card: Total Outflow Disbursed (Muted Crimson) -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-sm flex flex-col justify-between border-l-4 border-l-rose-500">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1">Total Outflow Disbursed</span>
+            <div class="mt-4">
+                <span class="text-2xl font-black text-rose-600 tracking-tight">₹<span id="metric-outflow">0</span></span>
+                <span class="text-[10px] text-rose-400/90 block mt-1">Debited capital mass streams</span>
+            </div>
+        </div>
+
+        <!-- Metrics Display Card: Remaining Liquidity Runway (Banking Emerald) -->
+        <div class="bg-emerald-900 text-emerald-50 p-5 rounded-xl border border-emerald-950 shadow-md flex flex-col justify-between border-l-4 border-l-emerald-500">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-300 block mb-1">Remaining Liquidity Runway</span>
+            <div class="mt-4">
+                <span class="text-2xl font-black text-white tracking-tight">₹<span id="metric-runway">50,000</span></span>
+                <span class="text-[10px] text-emerald-300/80 block mt-1">Available risk-free capital assets</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Visibility Interactive Chart Toggle Mechanism -->
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm mb-8 overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div class="flex items-center space-x-2">
+                <span class="text-base">📊</span>
+                <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Dynamic Strategic Visualizer Engine</h3>
+            </div>
+            <button id="btn-toggle-chart" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all shadow-sm flex items-center space-x-2">
+                <span>Toggle Component Overlay</span>
+            </button>
+        </div>
+        
+        <!-- On-Demand Analytics Visualizer Panel (Hidden by default) -->
+        <div id="chart-panel" class="p-6 border-b border-slate-100 hidden bg-white">
+            <div class="text-xs text-slate-400 mb-6">Proportional distribution mapping generated out of modern asset tracking nodes.</div>
+            
+            <!-- Raw Custom Structural Percentage Scaled Custom Bars Grid Layout -->
+            <div id="chart-bars-container" class="grid grid-cols-5 gap-4 h-48 items-end max-w-3xl mx-auto border-b border-slate-200 pb-2 pt-6">
+                <!-- Food Bar -->
+                <div class="flex flex-col items-center h-full justify-end group">
+                    <div id="bar-food" class="w-12 bg-slate-300 rounded-t transition-all duration-500 ease-out relative" style="height: 0%">
+                        <span id="lbl-food-val" class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-slate-700 hidden group-hover:block">0%</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase mt-2 block">Food</span>
+                </div>
+                <!-- SaaS Bar -->
+                <div class="flex flex-col items-center h-full justify-end group">
+                    <div id="bar-saas" class="w-12 bg-slate-300 rounded-t transition-all duration-500 ease-out relative" style="height: 0%">
+                        <span id="lbl-saas-val" class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-slate-700 hidden group-hover:block">0%</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase mt-2 block">SaaS</span>
+                </div>
+                <!-- Travel Bar -->
+                <div class="flex flex-col items-center h-full justify-end group">
+                    <div id="bar-travel" class="w-12 bg-slate-300 rounded-t transition-all duration-500 ease-out relative" style="height: 0%">
+                        <span id="lbl-travel-val" class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-slate-700 hidden group-hover:block">0%</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase mt-2 block">Travel</span>
+                </div>
+                <!-- Tax Saving Bar -->
+                <div class="flex flex-col items-center h-full justify-end group">
+                    <div id="bar-tax" class="w-12 bg-slate-300 rounded-t transition-all duration-500 ease-out relative" style="height: 0%">
+                        <span id="lbl-tax-val" class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-slate-700 hidden group-hover:block">0%</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase mt-2 block">Tax Saving</span>
+                </div>
+                <!-- Investments Bar -->
+                <div class="flex flex-col items-center h-full justify-end group">
+                    <div id="bar-investments" class="w-12 bg-slate-300 rounded-t transition-all duration-500 ease-out relative" style="height: 0%">
+                        <span id="lbl-investments-val" class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-slate-700 hidden group-hover:block">0%</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase mt-2 block">Investments</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- High-Performance Core Transaction Intake Console Panel -->
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm p-6 mb-8">
+        <div class="flex items-center space-x-2 mb-6">
+            <span class="text-base text-emerald-700">📥</span>
+            <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Secure Capital Intake Grid</h3>
+        </div>
+
+        <form id="expense-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Merchant Particular/Description Box -->
+            <div class="flex flex-col space-y-1.5">
+                <label for="expense-name" class="text-xs font-bold text-slate-600 uppercase tracking-wide">Particular / Destination</label>
+                <input type="text" id="expense-name" required placeholder="Enter company name, merchant or server item details" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-all">
+            </div>
+
+            <!-- Capital Mass (INR Value Box) -->
+            <div class="flex flex-col space-y-1.5">
+                <label for="expense-amount" class="text-xs font-bold text-slate-600 uppercase tracking-wide">Capital Mass (INR Value)</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 font-medium text-xs">₹</span>
+                    <input type="number" id="expense-amount" required placeholder="0.00" min="1" class="w-full bg-slate-50 border border-slate-200 rounded-lg pl-7 pr-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-all font-mono font-bold">
+                </div>
+            </div>
+
+            <!-- Category Structural Selection Selector Node -->
+            <div class="flex flex-col space-y-1.5">
+                <label for="expense-category" class="text-xs font-bold text-slate-600 uppercase tracking-wide">Structural Category Matrix</label>
+                <select id="expense-category" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-all">
+                    <option value="Food">🍔 Food &amp; Hospitality</option>
+                    <option value="SaaS">⚙️ SaaS &amp; Infrastructure</option>
+                    <option value="Travel">✈️ Corporate Travel</option>
+                    <option value="Tax Saving">⚖️ Tax Saving Allocation</option>
+                    <option value="Investments">🏛️ Strategic Capital Assets</option>
+                </select>
+            </div>
+
+            <!-- Settlement Authentication Calendar Node Picker -->
+            <div class="flex flex-col space-y-1.5">
+                <label for="expense-date" class="text-xs font-bold text-slate-600 uppercase tracking-wide">Settlement Timestamp</label>
+                <input type="date" id="expense-date" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-all font-mono">
+            </div>
+
+            <!-- Execution Action Call Button Base Row -->
+            <div class="md:col-span-2 lg:col-span-4 flex justify-end pt-2">
+                <button type="submit" class="w-full sm:w-auto bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-lg shadow transition-all duration-150">
+                    Commit Entry To Secured Ledger Stream
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Audited Ledger History Stream & Live Pattern Search Integration -->
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
+        
+        <div class="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 bg-slate-50/50">
+            <div class="flex items-center space-x-2">
+                <span class="text-base text-slate-700">📋</span>
+                <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Audited Cryptographic Ledger Stream</h3>
+            </div>
+            
+            <!-- Pattern-Matching Dynamic Search Input Field Base -->
+            <div class="relative w-full sm:w-64">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-xs">🔍</span>
+                <input type="text" id="search-bar" placeholder="Type keyword index pattern..." class="w-full bg-white border border-slate-200 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 transition-all">
+            </div>
+        </div>
+
+        <!-- Render Target Anchor Content Wrapper for Expense List Rows -->
+        <div class="divide-y divide-slate-100 max-h-[500px] overflow-y-auto" id="expense-list">
+            <!-- Dynamic Injection Block -->
+        </div>
+
+        <!-- System Cryptographic Signature Verification Node Badge -->
+        <div class="bg-slate-50 px-6 py-3 border-t border-slate-100 text-[10px] text-slate-400 font-mono flex flex-col sm:flex-row justify-between items-center space-y-1 sm:space-y-0">
+            <span>Verified System State Token ID: <span id="sys-token" class="text-slate-600 font-bold">MONVAEL-LOCAL-INIT-CORE</span></span>
+            <span class="flex items-center"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500 mr-1.5"></span>All state sequences synchronized instantly</span>
+        </div>
+    </div>
+
+    <!-- Core Business Architecture Ledger Controller Layer Script -->
+    <script src="ledger.js"></script>
+</body>
+</html>

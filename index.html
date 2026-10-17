@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#eef1f6] text-slate-800 antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monvael OS | Institutional Expense Engine</title>
+    <!-- Tailwind CSS Play CDN for custom layout architecture -->
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<body class="min-h-full font-sans flex flex-col selection:bg-slate-900 selection:text-white">
+
+    <!-- Global Application Root Canvas Wrapper -->
+    <div id="monvael-app" class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
+        
+        <!-- =========================================================================
+             CREATIVE INTERMEDIATE SLATE NAVIGATION HEADER
+             Engineered with a powerful left brand anchor and a tight right action node cluster.
+             ========================================================================= -->
+        <header class="w-full bg-white/70 border border-white rounded-3xl px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-md">
+            
+            
+            <div class="flex items-center gap-3.5 group">
+                <div class="h-10 w-10 rounded-2xl bg-slate-900 flex items-center justify-center shadow-md shadow-slate-900/10 transition-transform duration-300 group-hover:rotate-6">
+                    <!-- Premium minimal geometric core vector placeholder -->
+                    <span class="text-sm font-black text-white tracking-tighter">M</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[15px] font-extrabold tracking-tight text-slate-900 uppercase">Monvael</span>
+                    <span class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Expense Management</span>
+                </div>
+            </div>
+
+            <!-- Right Side: Compact Action Navigation Cluster -->
+            <nav class="flex items-center gap-1 bg-slate-200/60 p-1 rounded-2xl border border-slate-300/40">
+                <!-- Active Slate Workflow Route -->
+                <button class="px-5 py-2 text-xs font-bold rounded-xl bg-slate-900 text-white shadow-sm transition-all duration-150">
+                    Ledger
+                </button>
+                <!-- Inactive High-Contrast Workflow Routes -->
+                <button class="px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-white/50 transition-all duration-150">
+                    Analytics
+                </button>
+                <button class="px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-white/50 transition-all duration-150">
+                    Alarms
+                </button>
+            </nav>
+
+        </header>
+
+        <!-- Real Time Limit Configuration & Financial Summary Metrics-->
+        <section class="grid grid-cols-1 lg:grid-cols-4 gap-6 item-start">
+
+            <!-- Module Input Panel: Limit Threshold Controller-->
+             <div class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col gap-4">
+                <div>
+                    <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider"> Threshold Engine</h2>
+                    <p class="text-xxs text-slate-400 font-medium mt-0.5">Configure your institutional alert parameters</p> 
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label for="capital-input" class="text-[11px] font-bold text-slate-600 uppercase"> Set Capital Limit</label>
+                    <div class="relative flex items-center">
+                        <span class="absolute left-4 text-xs font-bold text-slate-400">₹</span>
+                        <input id="capital-input" type="number" placeholder="100000" class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl pl-8 pr-4 py-2.5 text-xs font-bold text-slate-900 focus:outline-none focus-border-slate-400 focus:bg-white transition-all">
+                    </div>
+                </div>
+             </div>
+
+             <!-- Metrics matrix grid layout container-->
+              <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
+
+                <!-- Metric Box 1: Allocated Capital Base-->
+                 <div class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between min-h[110px]">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Allocated Capital</span>
+                    <div class="flex flex-col mt-2">
+                        <span id="metric-allocted" class="text-2xl font-black text-slate-900 tracking-tight">₹1,000,000</span>
+                        <span class="text-xxs text-slate-400 font-medium mt-0.5"> Total locked capital reverse</span>
+                    </div>
+                 </div>
+
+                <!-- Metric box:2 Total Spent(Dynamic Alert Mode Anchor)-->
+                <div id="card-spent" class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between min-h-[110px] transition-all duration-300">
+                    <span id="label-spent" class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Spent</span>
+                    <div class="flex flex-col mt-2">
+                        <span id="metric-spent" class="text-2xl font-black text-slate-900 tracking-tight">₹0</span>
+                        <span id="alert-text-spent" class="text-xxs text-slate-400 font-medium mt-0.5">Current operational burn rate</span>
+                    </div>
+                </div>
+
+                <!-- Metric Box 3: Active Liquidity Runway (Dynamic Emerald Success Mode Anchor) -->
+               <div id="card-runway" class="bg-emerald-500/[0.08] border border-emerald-500/20 rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.1) flex flex-col justify-between min-h-[110px] transition-all] duration-300">
+                    <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active Runway</span>
+                 <div class="flex flex-col mt-2">
+                    <span id="metric-runway " class="text-2xl font-black  text-emerald-800 tracking-tight">₹1,000,000</span>
+                    <span class="text-xxs text-emerald-600/80 font-medium mt-0.5"> Safe operational buffer</span>
+                 </div>   
+               </div>  
+               
+              </div>
+        </section>
+
+    </div>
+
+    <!-- Master Application Core Script Link -->
+    <script src="script.js"></script>
+</body>
+</html>
