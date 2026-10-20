@@ -354,24 +354,44 @@ window.addEventListener('DOMContentLoaded', () => {
        COMMERCIAL BLOB DATA EXPORT ENGINE (CLIENT-SIDE EXTRACTION MATRIX)
        ========================================================================= */
     if (dom.exportCsvBtn) {
+           
         dom.exportCsvBtn.addEventListener('click', () => {
             if(expenses.length === 0) {
-                triggerToast("Extraction canceled: Empty operational memory cache.", "warning");
+                triggerToast("Operation canceled: Storage cache empty.", "warning");
                 return;
             }
-            let csvContent = "data:text/csv;charset=utf-8,Transaction ID,Description,Category,Date,Remarks,Amount (INR)\n";
+            
+            // Build structural spreadsheet text parameters template sequentially
+            let csvRows = ["Transaction ID,Description,Category,Date,Remarks,Amount (INR)"];
+            
             expenses.forEach(item => {
-                csvContent += `${item.id},"${item.title.replace(/"/g, '""')}",${item.category},${item.date},"${(item.remarks || '').replace(/"/g, '""')}",${item.amount}\n`;
+                // Safe string filtering to handle clean inner quote structures
+                const sanitizedTitle = (item.title || '').replace(/"/g, '""');
+                const sanitizedRemarks = (item.remarks || '').replace(/"/g, '""');
+                csvRows.push(`${item.id},"${sanitizedTitle}",${item.category},${item.date},"${sanitizedRemarks}",${item.amount}`);
             });
             
-            const encodingUri = encodeURI(csvContent);
+            // Join layout nodes with proper line breaks structure
+            const csvString = csvRows.join("\n");
+            
+            // FIXED: Convert large text array straight into a high-speed Binary Large Object (Blob)
+            const csvBlob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            
+            // Generate a temporary browser unique address allocation pointer safely
+            const objectUrl = URL.createObjectURL(csvBlob);
+            
             const invisibleAnchor = document.createElement('a');
-            invisibleAnchor.setAttribute('href', encodingUri);
+            invisibleAnchor.setAttribute('href', objectUrl);
             invisibleAnchor.setAttribute('download', `monvael_ledger_export_${Date.now()}.csv`);
+            
             document.body.appendChild(invisibleAnchor);
             invisibleAnchor.click();
+            
+            // Clean memory pipelines instantly by revoking the transient Object URL
             invisibleAnchor.remove();
-            triggerToast("Consultant CSV report downloaded successfully!");
+            URL.revokeObjectURL(objectUrl);
+            
+            triggerToast("Financial matrix spreadsheet downloaded successfully!");
         });
     }
 
