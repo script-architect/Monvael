@@ -1,0 +1,16 @@
+# =========================================================================
+# MONVAEL ROBOTS INFRASTRUCTURE CORE DIRECTIVES MATRIX
+# Designed for maximum optimized indexation parameters.
+# =========================================================================
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /script.js
+
+# Block local staging files or temp logs if any exist
+Disallow: /temp/
+Disallow: /config/
+
+# Global Target XML Index Pointer Map
+Sitemap: https://monvael.com/sitemap.xml

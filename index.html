@@ -1,105 +1,229 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-[#eef1f6] text-slate-800 antialiased">
 <head>
+    <!-- =========================================================================
+         TECHNICAL SEARCH ENGINE OPTIMIZATION (SEO) META INFRASTRUCTURE
+         These semantic declarations maximize indexability parameters for Google search bots.
+         ========================================================================= -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monvael OS | Institutional Expense Engine</title>
-    <!-- Tailwind CSS Play CDN for custom layout architecture -->
+    <meta name="description" content="Monvael Expense OS - Premium Institutional Wealth Management, Tax Optimization, and Real-Time Corporate Expense Tracking Ledger engineered for Tax Consultants, Insurance Agencies, and Financial Advisors.">
+    <meta name="keywords" content="Wealth Management OS, Expense Tracker for Tax Consultants, Institutional Asset Ledger, Tax Saving Operations Software, Advisory Burn Tracking Engine">
+    <meta name="author" content="Monvael Systems Core Corp">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://monvael.com/">
+    
+    <title>Monvael OS | Elite Institutional Expense Management & Budget Engine</title>
+    <!-- Tailwind CSS Play CDN for ultra-clean industrial architecture styling -->
    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+</head>
 <body class="min-h-full font-sans flex flex-col selection:bg-slate-900 selection:text-white">
 
-    <!-- Global Application Root Canvas Wrapper -->
-    <div id="monvael-app" class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
+    <!-- Tactile Micro-Toast UI Presentation Container Box -->
+    <div id="toast-matrix" class="fixed top-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Global Application Boundary Root Canvas Layout Container -->
+    <main id="monvael-app" class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
         
         <!-- =========================================================================
              CREATIVE INTERMEDIATE SLATE NAVIGATION HEADER
              Engineered with a powerful left brand anchor and a tight right action node cluster.
              ========================================================================= -->
         <header class="w-full bg-white/70 border border-white rounded-3xl px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-md">
-            
-            
+            <!-- Brand Layout Identity Matrix Anchor -->
             <div class="flex items-center gap-3.5 group">
                 <div class="h-10 w-10 rounded-2xl bg-slate-900 flex items-center justify-center shadow-md shadow-slate-900/10 transition-transform duration-300 group-hover:rotate-6">
-                    <!-- Premium minimal geometric core vector placeholder -->
                     <span class="text-sm font-black text-white tracking-tighter">M</span>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-[15px] font-extrabold tracking-tight text-slate-900 uppercase">Monvael</span>
-                    <span class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Expense Management</span>
+                    <h1 class="text-base font-extrabold tracking-tight text-slate-900 uppercase">Monvael</h1>
+                    <span class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Expense Management OS</span>
                 </div>
             </div>
 
-            <!-- Right Side: Compact Action Navigation Cluster -->
+            <!-- Clustered Navigation Routing Engine Subsystem -->
             <nav class="flex items-center gap-1 bg-slate-200/60 p-1 rounded-2xl border border-slate-300/40">
-                <!-- Active Slate Workflow Route -->
-                <button class="px-5 py-2 text-xs font-bold rounded-xl bg-slate-900 text-white shadow-sm transition-all duration-150">
-                    Ledger
-                </button>
-                <!-- Inactive High-Contrast Workflow Routes -->
-                <button class="px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-white/50 transition-all duration-150">
-                    Analytics
-                </button>
-                <button class="px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-white/50 transition-all duration-150">
-                    Alarms
-                </button>
+                <button id="tab-ledger" class="px-5 py-2 text-xs font-bold rounded-xl transition-all duration-150 bg-slate-900 text-white shadow-sm">Ledger</button>
+                <button id="tab-analytics" class="px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-white/50 transition-all duration-150">Analytics</button>
+                <button id="tab-alarms" class="px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-white/50 transition-all duration-150">Alarms</button>
             </nav>
-
         </header>
 
-        <!-- Real Time Limit Configuration & Financial Summary Metrics-->
-        <section class="grid grid-cols-1 lg:grid-cols-4 gap-6 item-start">
+        <!-- =========================================================================
+             VIEW CONTROL BLOCK 1: THE CORE TRANSACTION WORKSPACE
+             ========================================================================= -->
+        <div id="view-ledger" class="flex flex-col gap-8 transition-all duration-300">
+            
+            <!-- HIGH-PERFORMANCE HERO HORIZONTAL LOG TRACK INPUT FORM PANEL -->
+            <section class="w-full bg-white border border-white rounded-3xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+                <div class="flex flex-col gap-4">
+                    <div>
+                        <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Commit Asset Operational Burn</h2>
+                        <p class="text-[10px] text-slate-400 font-medium mt-0.5">Deploy new transactional ledger records instantly into local cache systems</p>
+                    </div>
 
-            <!-- Module Input Panel: Limit Threshold Controller-->
-             <div class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col gap-4">
+                    <form id="expense-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+                        <!-- Input Node 1: Primary Asset Descriptor Title -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="exp-title" class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Item Description</label>
+                            <input id="exp-title" type="text" placeholder="e.g., Server Cluster, Chai Setup" required class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
+                        </div>
+
+                        <!-- Input Node 2: Deep Categorization Vector Groups Selector -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="exp-category" class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Category Vector</label>
+                            <select id="exp-category" class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
+                                <optgroup label="Daily Essentials & Lifestyle">
+                                    <option value="Food & Chai">Food, Snacks & Chai</option>
+                                    <option value="Travel & Fuel">Travel, Cab & Fuel</option>
+                                    <option value="Rent & Living">Room Rent & PG</option>
+                                    <option value="Groceries">Daily Groceries</option>
+                                </optgroup>
+                                <optgroup label="Utilities & Digital Bills">
+                                    <option value="Recharge & Wifi">Mobile & Wi-Fi</option>
+                                    <option value="Electricity">Electricity & Utilities</option>
+                                    <option value="Entertainment">OTT & Subscriptions</option>
+                                </optgroup>
+                                <optgroup label="Financial Liability & Assets">
+                                    <option value="EMI & Loans">Car/Home EMI</option>
+                                    <option value="Insurance">Insurance Premiums</option>
+                                    <option value="Investments">Stocks & Mutual Funds</option>
+                                </optgroup>
+                                <optgroup label="Commercial & Business Operations">
+                                    <option value="Office & Infrastructure">Office & Servers</option>
+                                    <option value="Marketing">Marketing & Branding</option>
+                                    <option value="Consultancy">Staff Wages & Fees</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <!-- NEW: Input Node 3: Custom Granular Operational Remarks Metadata Filter -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="exp-remarks" class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Custom Remarks / Notes</label>
+                            <input id="exp-remarks" type="text" placeholder="e.g., Client meetup, dinner with girlfriend" class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
+                        </div>
+
+                        <!-- Input Node 4: Absolute Numeric Value Quantum Currency Field -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="exp-amount" class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Transaction Amount</label>
+                            <div class="relative flex items-center">
+                                <span class="absolute left-3.5 text-xs font-bold text-slate-400">₹</span>
+                                <input id="exp-amount" type="number" placeholder="0.00" required class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl pl-7 pr-3 py-2 text-xs font-bold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Input Node 5: Master Core Pipeline Verification Commit Trigger -->
+                        <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2 px-4 h-[34px] rounded-xl shadow-md transition-all">Commit Entry</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- REAL-TIME THRESHOLD SYSTEM CONFIGURATOR & QUANTUM STRIP METRICS CONTAINER -->
+            <section class="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+                <!-- Limit Modifier Parameter Input Block -->
+                <div class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col gap-4">
+                    <div>
+                        <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Threshold Engine</h2>
+                        <p class="text-[10px] text-slate-400 font-medium mt-0.5">Configure global operational limits</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="capital-input" class="text-[11px] font-bold text-slate-600 uppercase">Set Capital Limit</label>
+                        <div class="relative flex items-center">
+                            <span class="absolute left-4 text-xs font-bold text-slate-400">₹</span>
+                            <input id="capital-input" type="number" class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl pl-8 pr-4 py-2.5 text-xs font-bold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Summary Calculation Node Strips Matrix Layout -->
+                <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
+                    <!-- Base Allocated Budget Reference Tracker -->
+                    <div class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between min-h-[110px]">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Allocated Capital</span>
+                        <div class="flex flex-col mt-2"><span id="metric-allocated" class="text-2xl font-black text-slate-900 tracking-tight">₹0</span></div>
+                    </div>
+                    <!-- Aggregated Burn Monitor Card (Target Variant for Crimson Alerts) -->
+                    <div id="card-spent" class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between min-h-[110px] transition-all duration-300">
+                        <span id="label-spent" class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Spent</span>
+                        <div class="flex flex-col mt-2">
+                            <span id="metric-spent" class="text-2xl font-black text-slate-900 tracking-tight">₹0</span>
+                            <span id="alert-text-spent" class="text-[10px] text-slate-400 font-medium mt-0.5">Current operational burn rate</span>
+                        </div>
+                    </div>
+                    <!-- Liquid Resource Surplus Safety Buffer Indicator (Target for Emerald Modes) -->
+                    <div id="card-runway" class="bg-emerald-500/[0.08] border border-emerald-500/20 rounded-3xl p-5 flex flex-col justify-between min-h-[110px] transition-all duration-300">
+                        <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active Runway</span>
+                        <div class="flex flex-col mt-2"><span id="metric-runway" class="text-2xl font-black text-emerald-800 tracking-tight">₹0</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HORIZONTALLY EXPANDED COMPREHENSIVE STREAM DATABASE TERMINAL BLOCK -->
+            <section class="w-full bg-white border border-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col gap-5">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-slate-100">
+                    <div>
+                        <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Asset Ledger Stream</h2>
+                        <p class="text-[10px] text-slate-400 font-medium mt-0.5">Real-time localized transactional memory tracking storage metrics</p>
+                    </div>
+                    <!-- Integrated Pattern Query Matrices Panel -->
+                    <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                        <button id="export-csv-btn" class="px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all flex items-center gap-1.5">⬇️ Export CSV</button>
+                        <!-- Pattern Match Selector Field (Filters Titles, Categories, and Remarks Content) -->
+                        <div class="relative w-full sm:w-80 flex items-center">
+                            <input id="ledger-search" type="text" placeholder="Search by title, category, or remarks..." class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-1.5 pl-9 text-xs font-semibold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
+                            <span class="absolute left-3 text-slate-400 font-bold text-xs">🔍</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full overflow-x-auto">
+                    <div id="ledger-stream-container" class="flex flex-col gap-2.5 max-h-[320px] overflow-y-auto pr-1"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- =========================================================================
+             VIEW CONTROL BLOCK 2: THE WEEKLY ANALYTICS TERMINAL
+             ========================================================================= -->
+        <div id="view-analytics" class="hidden transition-all duration-300">
+            <section class="bg-white border border-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col gap-6">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                    <div>
+                        <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Weekly Expense Velocity Matrix</h2>
+                        <p class="text-[10px] text-slate-400 font-medium mt-0.5">Animated processing tracking historical consumer metrics</p>
+                    </div>
+                    <button id="toggle-chart-btn" class="px-3 py-1.5 text-xxs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all">Hide Matrix</button>
+                </div>
+                <!-- Dynamic Pure Tailwind Column Chart Grid Track -->
+                <div id="chart-container" class="grid grid-cols-7 gap-4 items-end h-48 pt-6 px-2 transition-all duration-500 overflow-hidden">
+                </div>
+            </section>
+        </div>
+
+        <!-- =========================================================================
+             VIEW CONTROL BLOCK 3: LOCALIZED CATEGORY ALARMS MANAGEMENT PANEL
+             ========================================================================= -->
+        <div id="view-alarms" class="hidden transition-all duration-300">
+            <section class="bg-white border border-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col gap-4">
                 <div>
-                    <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider"> Threshold Engine</h2>
-                    <p class="text-xxs text-slate-400 font-medium mt-0.5">Configure your institutional alert parameters</p> 
+                    <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Localized Category Alarms Engine</h2>
+                    <p class="text-[10px] text-slate-400 font-medium mt-0.5">Enforce custom micro thresholds across unique operational groups</p>
                 </div>
-
-                <div class="flex flex-col gap-2">
-                    <label for="capital-input" class="text-[11px] font-bold text-slate-600 uppercase"> Set Capital Limit</label>
-                    <div class="relative flex items-center">
-                        <span class="absolute left-4 text-xs font-bold text-slate-400">₹</span>
-                        <input id="capital-input" type="number" placeholder="100000" class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl pl-8 pr-4 py-2.5 text-xs font-bold text-slate-900 focus:outline-none focus-border-slate-400 focus:bg-white transition-all">
+                <form id="alarm-form" class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end border-b border-slate-100 pb-5">
+                    <div class="flex flex-col gap-1.5">
+                        <label for="alarm-category" class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Target Vector</label>
+                        <select id="alarm-category" class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900"></select>
                     </div>
-                </div>
-             </div>
-
-             <!-- Metrics matrix grid layout container-->
-              <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
-
-                <!-- Metric Box 1: Allocated Capital Base-->
-                 <div class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between min-h[110px]">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Allocated Capital</span>
-                    <div class="flex flex-col mt-2">
-                        <span id="metric-allocted" class="text-2xl font-black text-slate-900 tracking-tight">₹1,000,000</span>
-                        <span class="text-xxs text-slate-400 font-medium mt-0.5"> Total locked capital reverse</span>
+                    <div class="flex flex-col gap-1.5">
+                        <label for="alarm-limit" class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Max Allocation Cap</label>
+                        <input id="alarm-limit" type="number" placeholder="₹ Maximum Cap" required class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-2 text-xs font-bold text-slate-900">
                     </div>
-                 </div>
+                    <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2 px-4 h-[38px] rounded-xl transition-all">Arm Alarm Parameter</button>
+                </form>
+                <div id="alarms-registry-container" class="flex flex-col gap-2 mt-2"></div>
+            </section>
+        </div>
 
-                <!-- Metric box:2 Total Spent(Dynamic Alert Mode Anchor)-->
-                <div id="card-spent" class="bg-white border border-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between min-h-[110px] transition-all duration-300">
-                    <span id="label-spent" class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Spent</span>
-                    <div class="flex flex-col mt-2">
-                        <span id="metric-spent" class="text-2xl font-black text-slate-900 tracking-tight">₹0</span>
-                        <span id="alert-text-spent" class="text-xxs text-slate-400 font-medium mt-0.5">Current operational burn rate</span>
-                    </div>
-                </div>
-
-                <!-- Metric Box 3: Active Liquidity Runway (Dynamic Emerald Success Mode Anchor) -->
-               <div id="card-runway" class="bg-emerald-500/[0.08] border border-emerald-500/20 rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.1) flex flex-col justify-between min-h-[110px] transition-all] duration-300">
-                    <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active Runway</span>
-                 <div class="flex flex-col mt-2">
-                    <span id="metric-runway " class="text-2xl font-black  text-emerald-800 tracking-tight">₹1,000,000</span>
-                    <span class="text-xxs text-emerald-600/80 font-medium mt-0.5"> Safe operational buffer</span>
-                 </div>   
-               </div>  
-               
-              </div>
-        </section>
-
-    </div>
+    </main>
 
     <!-- Master Application Core Script Link -->
     <script src="script.js"></script>
