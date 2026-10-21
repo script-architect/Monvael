@@ -29,6 +29,10 @@ window.addEventListener('DOMContentLoaded', () => {
         ledgerSearch: document.getElementById('ledger-search'),
         exportCsvBtn: document.getElementById('export-csv-btn'),
         undoBtn: document.getElementById('undo-btn'), 
+        exportJsonBtn: document.getElementById('export-json-btn'),
+        importTriggerBtn: document.getElementById('import-trigger-btn'),
+        importJsonFile: document.getElementById('import-json-file'),
+        themeToggleBtn: document.getElementById('theme-toggle-btn'),
 
         // Interface Tab Switch Controls
         tabLedger: document.getElementById('tab-ledger'),
@@ -74,6 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
        MACBOOK PREMIUM FLOATING TACTILE TOAST NOTIFIER
        ========================================================================= */
     const triggerToast = (message, status = 'success') => {
+        if (!dom.toastMatrix) return;
         const toast = document.createElement('div');
         const bgType = status === 'success' ? 'bg-slate-900 text-white border border-slate-800' : 'bg-red-600 text-white';
         toast.className = `${bgType} px-4 py-2.5 rounded-2xl shadow-xl text-xs font-bold tracking-tight transition-all duration-300 opacity-0 transform translate-y-2 pointer-events-auto`;
@@ -287,8 +292,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     ${item.remarks ? `<p class="text-[10px] text-slate-500 font-medium italic mt-1.5 bg-white/80 border border-slate-200/30 px-2.5 py-1 rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.01)] w-max max-w-xs truncate">Note: "${item.remarks}"</p>` : ''}
                 </div>
                 <div class="flex items-center gap-4">
-                    <span class="text-xs font-black text-slate-900 bg-white border border-slate-200/40 px-3 py-1.5 rounded-xl shadow-sm">${formatCurrency(item.amount)}</span>
-                    <button onclick="deleteExpense(${item.id})" class="text-slate-400 hover:text-red-500 font-bold text-xs p-1 transition-colors">✕</button>
+                    <span class="text-xs font-black px-2.5 py-1 rounded-xl monvael-price-pill tracking-tight">${formatCurrency(item.amount)}</span>
+                    <button onclick="deleteExpense(${item.id})" class="text-slate-600 hover:text-red-500 font-bold text-xs p-1 transition-colors">✕</button>
                 </div>
             `;
             dom.ledgerStreamContainer.appendChild(row);
@@ -296,6 +301,16 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     if (dom.ledgerSearch) dom.ledgerSearch.addEventListener('input', (e) => renderLedgerRows(e.target.value));
+
+    const synchronizeUndoVisibility = () => {
+        if (dom.undoBtn) {
+            if (operationalHistoryStack) {
+                dom.undoBtn.classList.remove('hidden', 'opacity-0');
+            } else {
+                dom.undoBtn.classList.add('hidden', 'opacity-0');
+            }
+        }
+    };
 
     /* =========================================================================
        TRANSACTION PIPELINE SUBMISSION INTERCEPT CONTROLLER
@@ -334,8 +349,6 @@ window.addEventListener('DOMContentLoaded', () => {
             triggerToast(`Burn committed successfully: ${titleValue}`);
         
             synchronizeUndoVisibility(); 
-
-            triggerToast(`Operational burn logged: ${titleValue}`);
         });
     }
 
@@ -351,9 +364,6 @@ window.addEventListener('DOMContentLoaded', () => {
         triggerToast("Ledger instance purged from memory cache.", "warning");
         
         synchronizeUndoVisibility();
-
-        triggerToast("Ledger entity purged dynamically.", "warning");
-    
     };
 
     if (dom.capitalInput) {
@@ -371,7 +381,6 @@ window.addEventListener('DOMContentLoaded', () => {
        COMMERCIAL BLOB DATA EXPORT ENGINE (CLIENT-SIDE EXTRACTION MATRIX)
        ========================================================================= */
     if (dom.exportCsvBtn) {
-           
         dom.exportCsvBtn.addEventListener('click', () => {
             if(expenses.length === 0) {
                 triggerToast("Operation canceled: Storage cache empty.", "warning");
@@ -389,7 +398,7 @@ window.addEventListener('DOMContentLoaded', () => {
             });
             
             // Join layout nodes with proper line breaks structure
-            const csvString = csvRows.join("\n");
+            const csvString = csvRows.join("");
             
             // FIXED: Convert large text array straight into a high-speed Binary Large Object (Blob)
             const csvBlob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
@@ -495,35 +504,164 @@ window.addEventListener('DOMContentLoaded', () => {
     renderLedgerRows();
     synchronizeAlarmsRegistryView();
 
-       
-    const synchronizeUndoVisibility = () => {
-        if (operationalHistoryStack) {
-            dom.undoBtn.classList.remove('hidden', 'opacity-0');
-        } else {
-            dom.undoBtn.classList.add('hidden', 'opacity-0');
-        }
-    };
+    /* =========================================================================
+       CHRONOLOGICAL ACTION REVERSAL CONTROLLER
+       ========================================================================= */
+    if (dom.undoBtn) {
+        dom.undoBtn.addEventListener('click', () => {
+            if (!operationalHistoryStack) return;
 
-    dom.undoBtn.addEventListener('click', () => {
-        if (!operationalHistoryStack) return;
+            if (operationalHistoryStack.action === 'ADD') {
+                expenses = expenses.filter(item => item.id !== operationalHistoryStack.dataId);
+                triggerToast("Last addition undone successfully.", "warning");
+            } 
+            else if (operationalHistoryStack.action === 'DELETE') {
+                expenses.push(operationalHistoryStack.payload);
+                triggerToast(`Restored transaction: ${operationalHistoryStack.payload.title}`);
+            } 
+            else if (operationalHistoryStack.action === 'IMPORT') {
+                expenses = [...operationalHistoryStack.fallbackSnapshot.expenses];
+                capitalLimit = operationalHistoryStack.fallbackSnapshot.capitalLimit;
+                categoryAlarms = {...operationalHistoryStack.fallbackSnapshot.categoryAlarms};
+                
+                localStorage.setItem(KEYS.CAPITAL, capitalLimit);
+                localStorage.setItem(KEYS.ALARMS, JSON.stringify(categoryAlarms));
+                if (dom.capitalInput) dom.capitalInput.value = capitalLimit;
+                
+                triggerToast("Bulk data restoration undone. Reverted to previous state parameters.", "warning");
+            }
 
-        if (operationalHistoryStack.action === 'ADD') {
-            expenses = expenses.filter(item => item.id !== operationalHistoryStack.dataId);
-            triggerToast("Last addition undone successfully.", "warning");
-        } else if (operationalHistoryStack.action === 'DELETE') {
-            expenses.push(operationalHistoryStack.payload);
-            triggerToast(`Restored transaction: ${operationalHistoryStack.payload.title}`);
-        }
+            localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
+            operationalHistoryStack = null;
 
-        localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
-        operationalHistoryStack = null;
-
-        updateCoreMetrics();
-        renderLedgerRows();
-        synchronizeUndoVisibility();
-
-        triggerToast(`Operational burn logged: ${titleValue}`);
-    });
+            updateCoreMetrics();
+            renderLedgerRows();
+            synchronizeAlarmsRegistryView();
+            synchronizeUndoVisibility();
+        });
+    }
 
     synchronizeUndoVisibility();
+
+    /* =========================================================================
+       JSON BACKUP & RESTORATION MODULE SYSTEM
+       ========================================================================= */
+    if (dom.exportJsonBtn) {
+        dom.exportJsonBtn.addEventListener('click', () => {
+            if (expenses.length === 0) {
+                triggerToast("Backup canceled: Ledger operational stream cache empty.", "warning");
+                return;
+            }
+            
+            const backupPackage = {
+                version: "2.0.0-OS",
+                timestamp: Date.now(),
+                ledgerData: expenses,
+                thresholdLimit: capitalLimit,
+                allocatedAlarms: categoryAlarms
+            };
+            
+            const dataString = JSON.stringify(backupPackage, null, 2);
+            const jsonBlob = new Blob([dataString], { type: 'application/json;charset=utf-8;' });
+            const objectUrl = URL.createObjectURL(jsonBlob);
+            
+            const anchor = document.createElement('a');
+            anchor.setAttribute('href', objectUrl);
+            anchor.setAttribute('download', `monvael_master_backup_${Date.now()}.json`);
+            document.body.appendChild(anchor);
+            anchor.click();
+            
+            anchor.remove();
+            URL.revokeObjectURL(objectUrl);
+            triggerToast("Monvael database backup schema exported successfully!");
+        });
+    }
+
+    if (dom.importTriggerBtn && dom.importJsonFile) {
+        dom.importTriggerBtn.addEventListener('click', () => dom.importJsonFile.click());
+    }
+
+    if (dom.importJsonFile) {
+        dom.importJsonFile.addEventListener('change', (event) => {
+            const targetFile = event.target.files[0];
+            if (!targetFile) return;
+            
+            const fileStreamReader = new FileReader();
+            
+            fileStreamReader.onload = (e) => {
+                try {
+                    const parsedResult = JSON.parse(e.target.result);
+                    
+                    if (!parsedResult || !parsedResult.ledgerData || !Array.isArray(parsedResult.ledgerData)) {
+                        throw new Error("Broken schema");
+                    }
+                    
+                    // Take isolated deep snapshot copy of exact configuration parameters before overwrite
+                    const priorStateSnapshot = {
+                        expenses: [...expenses],
+                        capitalLimit: capitalLimit,
+                        categoryAlarms: {...categoryAlarms}
+                    };
+                    
+                    operationalHistoryStack = { action: 'IMPORT', fallbackSnapshot: priorStateSnapshot };
+                    
+                    expenses = parsedResult.ledgerData;
+                    capitalLimit = parsedResult.thresholdLimit || 100000;
+                    categoryAlarms = parsedResult.allocatedAlarms || {};
+                    
+                    localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
+                    localStorage.setItem(KEYS.CAPITAL, capitalLimit);
+                    localStorage.setItem(KEYS.ALARMS, JSON.stringify(categoryAlarms));
+                    
+                    if (dom.capitalInput) dom.capitalInput.value = capitalLimit;
+                    updateCoreMetrics();
+                    renderLedgerRows();
+                    synchronizeAlarmsRegistryView();
+                    synchronizeUndoVisibility();
+                    
+                    triggerToast("System session successfully restored from local backup!");
+                } catch (err) {
+                    triggerToast("Data restoration aborted: Broken JSON schema file.", "error");
+                }
+                dom.importJsonFile.value = '';
+            };
+            
+            fileStreamReader.readAsText(targetFile);
+        });
+    }
+
+    /* =========================================================================
+       PURE CSS ATTRIBUTE THEME ENGINE CONTROLLER
+       ========================================================================= */
+    const STORAGE_THEME_KEY = 'monvael_ambient_theme';
+    let activeTheme = localStorage.getItem(STORAGE_THEME_KEY) || 'light';
+    
+    const applyAmbientThemeState = (targetMode) => {
+        document.documentElement.setAttribute('data-theme', targetMode);
+        
+        if (dom.themeToggleBtn) {
+            if (targetMode === 'dark') {
+                dom.themeToggleBtn.className = "p-2 rounded-xl bg-slate-800 text-amber-400 text-xs font-black shadow-inner border border-slate-700/40";
+                dom.themeToggleBtn.textContent = "☀️ Light Mode";
+            } else {
+                dom.themeToggleBtn.className = "p-2 rounded-xl bg-slate-200/80 text-slate-700 text-xs font-black shadow-inner";
+                dom.themeToggleBtn.textContent = "🌙 Dark Mode";
+            }
+        }
+        localStorage.setItem(STORAGE_THEME_KEY, targetMode);
+    };
+
+    if (dom.themeToggleBtn) {
+        dom.themeToggleBtn.addEventListener('click', () => {
+            activeTheme = activeTheme === 'light' ? 'dark' : 'light';
+            applyAmbientThemeState(activeTheme);
+            
+            if (dom.viewAnalytics && !dom.viewAnalytics.classList.contains('hidden')) {
+                renderAnalyticsCharts();
+            }
+        });
+    }
+
+    // Fire default bootstrap sync loop
+    applyAmbientThemeState(activeTheme);
 });
