@@ -13,4 +13,4 @@ Disallow: /temp/
 Disallow: /config/
 
 # Global Target XML Index Pointer Map
-Sitemap: https://movael.vercel.app/
+Sitemap: https://monvael.vercel.app/

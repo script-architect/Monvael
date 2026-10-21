@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    <!-- Monvael OS — Financial Analytics Workspace -->
+    <url>
+        <loc>https://monvael.vercel.app/</loc>
+        <lastmod>2026-10-21</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+
+        <!-- Main Dashboard / Product Preview -->
+        <image:image>
+            <image:loc>https://monvael.vercel.app/images/siteview.png</image:loc>
+            <image:title>Monvael OS Financial Analytics Dashboard</image:title>
+            <image:caption>
+                Monvael OS — next-generation financial analytics workspace,
+                expense tracking, budget planning and corporate burn monitoring dashboard.
+            </image:caption>
+        </image:image>
+
+        <!-- Monvael OS Brand Logo -->
+        <image:image>
+            <image:loc>https://monvael.vercel.app/images/logo.png</image:loc>
+            <image:title>Monvael OS Logo</image:title>
+            <image:caption>
+                Monvael OS — intelligent financial analytics and expense management platform.
+            </image:caption>
+        </image:image>
+
+    </url>
+
+</urlset>

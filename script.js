@@ -12,6 +12,7 @@ const KEYS = {
 let expenses = JSON.parse(localStorage.getItem(KEYS.EXPENSES)) || [];
 let capitalLimit = parseFloat(localStorage.getItem(KEYS.CAPITAL)) || 100000;
 let categoryAlarms = JSON.parse(localStorage.getItem(KEYS.ALARMS)) || {};
+let operationalHistoryStack = null; 
 
 // Guarantee document layout tree parsing finishes completely before linking context listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -27,6 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
         expAmount: document.getElementById('exp-amount'),
         ledgerSearch: document.getElementById('ledger-search'),
         exportCsvBtn: document.getElementById('export-csv-btn'),
+        undoBtn: document.getElementById('undo-btn'), 
 
         // Interface Tab Switch Controls
         tabLedger: document.getElementById('tab-ledger'),
@@ -320,6 +322,8 @@ window.addEventListener('DOMContentLoaded', () => {
             expenses.push(targetTransaction);
             localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
 
+            operationalHistoryStack = { action: 'ADD', dataId: targetTransaction.id };
+
             dom.expTitle.value = '';
             dom.expRemarks.value = '';
             dom.expAmount.value = '';
@@ -328,15 +332,28 @@ window.addEventListener('DOMContentLoaded', () => {
             updateCoreMetrics();
             renderLedgerRows();
             triggerToast(`Burn committed successfully: ${titleValue}`);
+        
+            synchronizeUndoVisibility(); 
+
+            triggerToast(`Operational burn logged: ${titleValue}`);
         });
     }
 
     window.deleteExpense = (targetId) => {
+        const itemToPurge = expenses.find(item => item.id === targetId);
+        if (!itemToPurge) return;
+        operationalHistoryStack = { action: 'DELETE', payload: itemToPurge };
+
         expenses = expenses.filter(item => item.id !== targetId);
         localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
         updateCoreMetrics();
         renderLedgerRows();
         triggerToast("Ledger instance purged from memory cache.", "warning");
+        
+        synchronizeUndoVisibility();
+
+        triggerToast("Ledger entity purged dynamically.", "warning");
+    
     };
 
     if (dom.capitalInput) {
@@ -477,4 +494,36 @@ window.addEventListener('DOMContentLoaded', () => {
     updateCoreMetrics();
     renderLedgerRows();
     synchronizeAlarmsRegistryView();
+
+       
+    const synchronizeUndoVisibility = () => {
+        if (operationalHistoryStack) {
+            dom.undoBtn.classList.remove('hidden', 'opacity-0');
+        } else {
+            dom.undoBtn.classList.add('hidden', 'opacity-0');
+        }
+    };
+
+    dom.undoBtn.addEventListener('click', () => {
+        if (!operationalHistoryStack) return;
+
+        if (operationalHistoryStack.action === 'ADD') {
+            expenses = expenses.filter(item => item.id !== operationalHistoryStack.dataId);
+            triggerToast("Last addition undone successfully.", "warning");
+        } else if (operationalHistoryStack.action === 'DELETE') {
+            expenses.push(operationalHistoryStack.payload);
+            triggerToast(`Restored transaction: ${operationalHistoryStack.payload.title}`);
+        }
+
+        localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
+        operationalHistoryStack = null;
+
+        updateCoreMetrics();
+        renderLedgerRows();
+        synchronizeUndoVisibility();
+
+        triggerToast(`Operational burn logged: ${titleValue}`);
+    });
+
+    synchronizeUndoVisibility();
 });
