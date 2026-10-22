@@ -639,16 +639,19 @@ window.addEventListener('DOMContentLoaded', () => {
     const applyAmbientThemeState = (targetMode) => {
         document.documentElement.setAttribute('data-theme', targetMode);
         
-        if (dom.themeToggleBtn) {
-            if (targetMode === 'dark') {
-                dom.themeToggleBtn.className = "p-2 rounded-xl bg-slate-800 text-amber-400 text-xs font-black shadow-inner border border-slate-700/40";
-                dom.themeToggleBtn.textContent = "☀️ Light Mode";
-            } else {
-                dom.themeToggleBtn.className = "p-2 rounded-xl bg-slate-200/80 text-slate-700 text-xs font-black shadow-inner";
-                dom.themeToggleBtn.textContent = "🌙 Dark Mode";
-            }
+       if (dom.themeToggleBtn) {
+        if (targetMode === 'dark') {
+            dom.themeToggleBtn.className = "p-2 rounded-xl bg-slate-800 text-amber-400 text-xs font-black shadow-inner border border-slate-700/40 cursor-pointer";
+            dom.themeToggleBtn.textContent = "☀️";
+            dom.themeToggleBtn.setAttribute('title', 'Switch to Light Mode'); // Mouse lane par ye text dikhega
+        } else {
+            dom.themeToggleBtn.className = "p-2 rounded-xl bg-slate-200/80 text-slate-700 text-xs font-black shadow-inner cursor-pointer";
+            dom.themeToggleBtn.textContent = "🌑";
+            dom.themeToggleBtn.setAttribute('title', 'Switch to Dark Mode'); // Mouse lane par ye text dikhega
         }
-        localStorage.setItem(STORAGE_THEME_KEY, targetMode);
+    }
+    localStorage.setItem(STORAGE_THEME_KEY, targetMode);
+
     };
 
     if (dom.themeToggleBtn) {

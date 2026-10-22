@@ -1,6 +1,5 @@
 /* =========================================================================
-   MONVAEL OS - MASTER DATA-THEME VARIABLE INVERSION GRID
-   Forced global overrides targeting absolute nested utility elements layout.
+   MONVAEL OS - HIGH CONTRAST PITCH BLACK & CRUISE WHITE GRID
    ========================================================================= */
 
 /* Centralized CSS Color Tokens Matrix */
@@ -16,114 +15,151 @@
 }
 
 [data-theme="dark"] {
-    --app-bg: #090a0f;
-    --card-bg: #12141c;
-    --text-main: #f8fafc;
-    --text-sub: #94a3b8;
-    --border-line: rgba(30, 41, 59, 0.8);
-    --input-fill: #1a1d29;
-    --chart-bar: #f8fafc; /* FIXED: Analytics bars turn crisp pure white in dark mode */
-    --chart-track: rgba(255, 255, 255, 0.05);
+    --app-bg: #000000;                     /* Pure Pitch Black (No grey fillers) */
+    --card-bg: #0a0a0c;                    /* Deepest Solid Obsidian Card */
+    --text-main: #ffffff;                  /* Crisp Solid White */
+    --text-sub: #a1a1aa;                   /* Sharp silver-grey for subtitles */
+    --border-line: rgba(255, 255, 255, 0.15); /* High-contrast clean white border line */
+    --input-fill: #050506;                 /* Ultra dark input pockets */
+    --chart-bar: #ffffff;                  /* Analytics bars turn solid white */
+    --chart-track: rgba(255, 255, 255, 0.08);
 }
 
-/* 1. Global Document Space Invalidation */
+/* 1. Global Document Space Invalidation & Custom Black Scrollbar */
 html, body {
     background-color: var(--app-bg) !important;
     color: var(--text-main) !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Hardcore Dark Scrollbar Injection */
+[data-theme="dark"] ::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+    background: #000000 !important;
+}
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: #050506 !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #27272a !important;
+    border: 2px solid #050506 !important;
+    border-radius: 5px !important;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: #52525b !important;
 }
 
 /* 2. Forced Inversion Overrides for Heavy Containers & Headers */
 [data-theme="dark"] header,
 [data-theme="dark"] div.bg-white,
-[data-theme="dark"] section.bg-white {
+[data-theme="dark"] section.bg-white,
+[data-theme="dark"] div[class*="bg-slate-"],
+[data-theme="dark"] div[class*="bg-neutral-"] {
     background-color: var(--card-bg) !important;
     border-color: var(--border-line) !important;
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9) !important;
+    border-width: 1px !important;
+    border-style: solid !important;
 }
 
-/* 3. Text Nodes & Typographical Color Correction */
-[data-theme="dark"] .text-slate-900,
-[data-theme="dark"] .text-slate-800,
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
-[data-theme="dark"] span.text-slate-900,
-[data-theme="dark"] span.text-slate-800 {
+/* 3. HARDCORE LOGO INVERSION (M becomes Black, Background becomes White) */
+/* Note: Agar logo kisi div/span ke andar 'M' text hai, ya image/svg container hai: */
+[data-theme="dark"] .bg-slate-900:has(span:contains("M")), 
+[data-theme="dark"] div:has(> span:text("M")),
+[data-theme="dark"] .logo-container-selector, /* Agar aapka koi custom class ho logo par toh yahan apply hoga */
+[data-theme="dark"] header div.flex.items-center div.bg-slate-900 {
+    background-color: #ffffff !important;   /* Outer box pure white */
+    color: #000000 !important;              /* Inner 'M' text pure black */
+}
+
+/* Agar logo ke andar actual <span> tag hai toh uska color black karne ke liye */
+[data-theme="dark"] header div.flex.items-center div.bg-slate-900 span {
+    color: #000000 !important;
+}
+
+/* 4. Active Top Navigation Header Buttons */
+[data-theme="dark"] header button, 
+[data-theme="dark"] header .bg-slate-900 {
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+[data-theme="dark"] header button.active,
+[data-theme="dark"] header div.bg-slate-800 {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* 5. Text Nodes & Typographical Contrast Engine */
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+[data-theme="dark"] .text-slate-900, [data-theme="dark"] .text-slate-800,
+[data-theme="dark"] span {
     color: var(--text-main) !important;
 }
-
-[data-theme="dark"] .text-slate-400,
-[data-theme="dark"] .text-slate-500,
-[data-theme="dark"] p.text-slate-400 {
+[data-theme="dark"] p, [data-theme="dark"] .text-slate-400, [data-theme="dark"] .text-slate-500 {
     color: var(--text-sub) !important;
 }
 
-/* 4. Active Mechanical Input Elements & Dropdowns Selection Panels */
+/* Keep action badges readable (Red/Green text updates won't overwrite completely) */
+[data-theme="dark"] .text-red-500, [data-theme="dark"] .text-red-400 { color: #ff4545 !important; }
+[data-theme="dark"] .text-emerald-500, [data-theme="dark"] .text-emerald-400 { color: #00e676 !important; }
+
+/* 6. Active Mechanical Input Elements & Dropdowns Selection Panels */
 [data-theme="dark"] input,
-[data-theme="dark"] select {
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
     background-color: var(--input-fill) !important;
-    border-color: var(--border-line) !important;
-    color: var(--text-main) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8) !important;
+    border-radius: 8px !important;
 }
-
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus {
+    border-color: #ffffff !important; /* Focus karne par ekdum crisp white border */
+    outline: none !important;
+}
 [data-theme="dark"] input::placeholder {
-    color: rgba(255, 255, 255, 0.3) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
 }
 
-/* 5. Data List Stream Entries Alignment Protection */
-[data-theme="dark"] #ledger-stream-container div.bg-slate-50 {
+/* 7. Data List Stream Entries Alignment Protection */
+[data-theme="dark"] #ledger-stream-container div.bg-slate-50,
+[data-theme="dark"] div.border-slate-100 {
     background-color: rgba(255, 255, 255, 0.02) !important;
     border-color: var(--border-line) !important;
 }
-
 [data-theme="dark"] #ledger-stream-container div.bg-slate-50:hover {
-    background-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
-/* 6. Dynamic Weekly Expense Velocity Chart Tracks & White Bars Engine */
-[data-theme="dark"] #chart-container div.bg-slate-100 {
+/* 8. Dynamic Weekly Expense Velocity Chart Tracks & White Bars Engine */
+[data-theme="dark"] #chart-container div.bg-slate-100,
+[data-theme="dark"] div.bg-slate-100 {
     background-color: var(--chart-track) !important;
     border-color: var(--border-line) !important;
 }
-
-[data-theme="dark"] #chart-container div.bg-slate-900 {
-    background-color: var(--chart-bar) !important;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1) !important;
+[data-theme="dark"] #chart-container div.bg-slate-900,
+[data-theme="dark"] div.bg-slate-900 {
+    background-color: var(--chart-bar) !important; /* Pure solid white bars */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2) !important;
 }
 
-/* 7. Low-Profile Sponsor Banner Custom Inversion Layer */
+/* 9. Low-Profile Sponsor Banner Custom Inversion Layer */
 [data-theme="dark"] footer a.bg-slate-50 {
     background-color: rgba(255, 255, 255, 0.02) !important;
     border-color: var(--border-line) !important;
 }
 
-[data-theme="dark"] footer a.bg-slate-50:hover {
-    background-color: rgba(255, 255, 255, 0.04) !important;
-}
-
 /* =========================================================================
    UNIVERSAL TYPOGRAPHY PRICE PILL VISIBILITY OVERRIDES
-   Guarantees perfect readability across alternative dynamic canvas.
    ========================================================================= */
-
-/* Default Light Mode Token Values mapping */
-:root {
-    --pill-bg: rgba(15, 23, 42, 0.08);
-    --pill-text: #0f172a;
-}
-
-/* Elite Dark Mode Token Values mapping */
-[data-theme="dark"] {
-    --pill-bg: rgba(255, 255, 255, 0.12);
-    --pill-text: #ffffff;
-}
-
-/* Master Fixed Core Rule - Prevents text fading inside layout changes */
 .monvael-price-pill {
-    background-color: var(--pill-bg) !important;
-    color: var(--pill-text) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
     font-family: monospace !important;
     display: inline-block !important;
-    transition: all 0.2s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 6px;
 }
