@@ -14,7 +14,7 @@
     --chart-track: #f1f5f9;
 }
 
-[data-theme="dark"] {
+[data-theme="dark"], .dark {
     --app-bg: #000000;                     /* Pure Pitch Black (No grey fillers) */
     --card-bg: #0a0a0c;                    /* Deepest Solid Obsidian Card */
     --text-main: #ffffff;                  /* Crisp Solid White */
@@ -33,30 +33,31 @@ html, body {
 }
 
 /* Hardcore Dark Scrollbar Injection */
-[data-theme="dark"] ::-webkit-scrollbar {
+[data-theme="dark"] ::-webkit-scrollbar, .dark ::-webkit-scrollbar {
     width: 10px !important;
     height: 10px !important;
     background: #000000 !important;
 }
-[data-theme="dark"] ::-webkit-scrollbar-track {
+[data-theme="dark"] ::-webkit-scrollbar-track, .dark ::-webkit-scrollbar-track {
     background: #050506 !important;
     border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-[data-theme="dark"] ::-webkit-scrollbar-thumb {
+[data-theme="dark"] ::-webkit-scrollbar-thumb, .dark ::-webkit-scrollbar-thumb {
     background: #27272a !important;
     border: 2px solid #050506 !important;
     border-radius: 5px !important;
 }
-[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover, .dark ::-webkit-scrollbar-thumb:hover {
     background: #52525b !important;
 }
 
 /* 2. Forced Inversion Overrides for Heavy Containers & Headers */
-[data-theme="dark"] header,
-[data-theme="dark"] div.bg-white,
-[data-theme="dark"] section.bg-white,
-[data-theme="dark"] div[class*="bg-slate-"],
-[data-theme="dark"] div[class*="bg-neutral-"] {
+[data-theme="dark"] header, .dark header,
+[data-theme="dark"] nav, .dark nav,
+[data-theme="dark"] div.bg-white, .dark div.bg-white,
+[data-theme="dark"] section.bg-white, .dark section.bg-white,
+[data-theme="dark"] div[class*="bg-slate-"], .dark div[class*="bg-slate-"],
+[data-theme="dark"] div[class*="bg-neutral-"], .dark div[class*="bg-neutral-"] {
     background-color: var(--card-bg) !important;
     border-color: var(--border-line) !important;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9) !important;
@@ -65,101 +66,163 @@ html, body {
 }
 
 /* 3. HARDCORE LOGO INVERSION (M becomes Black, Background becomes White) */
-/* Note: Agar logo kisi div/span ke andar 'M' text hai, ya image/svg container hai: */
-[data-theme="dark"] .bg-slate-900:has(span:contains("M")), 
-[data-theme="dark"] div:has(> span:text("M")),
-[data-theme="dark"] .logo-container-selector, /* Agar aapka koi custom class ho logo par toh yahan apply hoga */
-[data-theme="dark"] header div.flex.items-center div.bg-slate-900 {
+[data-theme="dark"] .bg-slate-900:has(span:contains("M")), .dark .bg-slate-900:has(span:contains("M")),
+[data-theme="dark"] div:has(> span:text("M")), .dark div:has(> span:text("M")),
+[data-theme="dark"] .logo-container-selector, .dark .logo-container-selector,
+[data-theme="dark"] header div.flex.items-center div.bg-slate-900, .dark header div.flex.items-center div.bg-slate-900 {
     background-color: #ffffff !important;   /* Outer box pure white */
     color: #000000 !important;              /* Inner 'M' text pure black */
 }
-
-/* Agar logo ke andar actual <span> tag hai toh uska color black karne ke liye */
-[data-theme="dark"] header div.flex.items-center div.bg-slate-900 span {
+[data-theme="dark"] header div.flex.items-center div.bg-slate-900 span, .dark header div.flex.items-center div.bg-slate-900 span {
     color: #000000 !important;
 }
 
-/* 4. Active Top Navigation Header Buttons */
-[data-theme="dark"] header button, 
-[data-theme="dark"] header .bg-slate-900 {
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+/* ==========================================================================
+   4. Active Top Navigation Header Buttons (Pure Mono Strict Mode)
+   ========================================================================== */
+
+/* Dark mode basic state for navbar buttons */
+[data-theme="dark"] nav button, .dark nav button,
+[data-theme="dark"] header button, .dark header button {
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    background-color: transparent !important;
 }
-[data-theme="dark"] header button.active,
-[data-theme="dark"] header div.bg-slate-800 {
+
+/* Dark mode active selected state (e.g. Ledger Workspace Button) */
+/* ==========================================
+   DYNAMIC COMPONENT TABS ACTIVE STATE (DARK MODE)
+   ========================================== */
+[data-theme="dark"] nav button.active, .dark nav button.active,
+[data-theme="dark"] nav button[class*="bg-slate-900"], .dark nav button[class*="bg-slate-900"],
+[data-theme="dark"] header button.active, .dark header button.active {
     background-color: #ffffff !important;
-    color: #000000 !important;
+    color: #000000 !important;              /* Crisp pure black text overlay */
+    border-color: #ffffff !important;
+    font-weight: 800 !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+/* Dark mode hover interactions */
+[data-theme="dark"] nav button:not(.active):hover, .dark nav button:not(.active):hover,
+[data-theme="dark"] header button:not(.active):hover, .dark header button:not(.active):hover,
+[data-theme="dark"] #theme-toggle-btn:hover, .dark #theme-toggle-btn:hover,
+[data-theme="dark"] #hamburger-menu-btn:hover, .dark #hamburger-menu-btn:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* 5. Text Nodes & Typographical Contrast Engine */
-[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
-[data-theme="dark"] .text-slate-900, [data-theme="dark"] .text-slate-800,
-[data-theme="dark"] span {
+[data-theme="dark"] h1, .dark h1, [data-theme="dark"] h2, .dark h2, [data-theme="dark"] h3, .dark h3,
+[data-theme="dark"] .text-slate-900, .dark .text-slate-900, [data-theme="dark"] .text-slate-800, .dark .text-slate-800 {
     color: var(--text-main) !important;
 }
-[data-theme="dark"] p, [data-theme="dark"] .text-slate-400, [data-theme="dark"] .text-slate-500 {
+
+/* FIX: Target span nodes selectively to prevent overwriting high contrast button colors */
+[data-theme="dark"] body :not(button):not(.monvael-price-pill) > span, 
+.dark body :not(button):not(.monvael-price-pill) > span {
+    color: var(--text-main) !important;
+}
+[data-theme="dark"] p, .dark p, [data-theme="dark"] .text-slate-400, .dark .text-slate-400, [data-theme="dark"] .text-slate-500, .dark .text-slate-500 {
     color: var(--text-sub) !important;
 }
 
 /* Keep action badges readable (Red/Green text updates won't overwrite completely) */
-[data-theme="dark"] .text-red-500, [data-theme="dark"] .text-red-400 { color: #ff4545 !important; }
-[data-theme="dark"] .text-emerald-500, [data-theme="dark"] .text-emerald-400 { color: #00e676 !important; }
+[data-theme="dark"] .text-red-500, .dark .text-red-500, [data-theme="dark"] .text-red-400, .dark .text-red-400 { color: #ff4545 !important; }
+[data-theme="dark"] .text-emerald-500, .dark .text-emerald-500, [data-theme="dark"] .text-emerald-400, .dark .text-emerald-400 { color: #00e676 !important; }
 
 /* 6. Active Mechanical Input Elements & Dropdowns Selection Panels */
-[data-theme="dark"] input,
-[data-theme="dark"] select,
-[data-theme="dark"] textarea {
+[data-theme="dark"] input, .dark input,
+[data-theme="dark"] select, .dark select,
+[data-theme="dark"] textarea, .dark textarea {
     background-color: var(--input-fill) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #ffffff !important;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.8) !important;
     border-radius: 8px !important;
 }
-[data-theme="dark"] input:focus,
-[data-theme="dark"] select:focus {
-    border-color: #ffffff !important; /* Focus karne par ekdum crisp white border */
+[data-theme="dark"] input:focus, .dark input:focus,
+[data-theme="dark"] select:focus, .dark select:focus {
+    border-color: #ffffff !important;
     outline: none !important;
 }
-[data-theme="dark"] input::placeholder {
+[data-theme="dark"] input::placeholder, .dark input::placeholder {
     color: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* 7. Data List Stream Entries Alignment Protection */
-[data-theme="dark"] #ledger-stream-container div.bg-slate-50,
-[data-theme="dark"] div.border-slate-100 {
+[data-theme="dark"] #ledger-stream-container div.bg-slate-50, .dark #ledger-stream-container div.bg-slate-50,
+[data-theme="dark"] div.border-slate-100, .dark div.border-slate-100 {
     background-color: rgba(255, 255, 255, 0.02) !important;
     border-color: var(--border-line) !important;
 }
-[data-theme="dark"] #ledger-stream-container div.bg-slate-50:hover {
+[data-theme="dark"] #ledger-stream-container div.bg-slate-50:hover, .dark #ledger-stream-container div.bg-slate-50:hover {
     background-color: rgba(255, 255, 255, 0.06) !important;
     border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* 8. Dynamic Weekly Expense Velocity Chart Tracks & White Bars Engine */
-[data-theme="dark"] #chart-container div.bg-slate-100,
-[data-theme="dark"] div.bg-slate-100 {
+[data-theme="dark"] #chart-container div.bg-slate-100, .dark #chart-container div.bg-slate-100,
+[data-theme="dark"] div.bg-slate-100, .dark div.bg-slate-100 {
     background-color: var(--chart-track) !important;
     border-color: var(--border-line) !important;
 }
-[data-theme="dark"] #chart-container div.bg-slate-900,
-[data-theme="dark"] div.bg-slate-900 {
-    background-color: var(--chart-bar) !important; /* Pure solid white bars */
+[data-theme="dark"] #chart-container div.bg-slate-900, .dark #chart-container div.bg-slate-900,
+[data-theme="dark"] div.bg-slate-900, .dark div.bg-slate-900 {
+    background-color: var(--chart-bar) !important;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.2) !important;
 }
 
 /* 9. Low-Profile Sponsor Banner Custom Inversion Layer */
-[data-theme="dark"] footer a.bg-slate-50 {
+[data-theme="dark"] footer a.bg-slate-50, .dark footer a.bg-slate-50 {
     background-color: rgba(255, 255, 255, 0.02) !important;
     border-color: var(--border-line) !important;
 }
 
 /* =========================================================================
-   UNIVERSAL TYPOGRAPHY PRICE PILL VISIBILITY OVERRIDES
+   UNIVERSAL TYPOGRAPHY PRICE PILL VISIBILITY OVERRIDES (UNCHANGED)
    ========================================================================= */
 .monvael-price-pill {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    color: #ffffff !important;
+    background-color: rgba(254, 248, 248, 0.459) !important;
+    color: #000000 !important;
     font-family: monospace !important;
     display: inline-block !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-radius: 6px;
 }
+
+/* Monvael Dark Mode CSS Adjustments for Features Section */
+.dark #features-matrix {
+  background-color: #0f172a !important; /* slate-900 */
+  border-color: #334155 !important;     /* slate-700 */
+  color: #000000 !important;             /* slate-100 */
+}
+
+.dark #features-matrix h2, 
+.dark #features-matrix h3 {
+  color: #ffffff !important;
+}
+
+.dark #features-matrix p {
+  color: #94a3b8 !important;             /* slate-400 */
+}
+
+.dark #features-matrix .bg-slate-50 {
+  background-color: rgba(30, 41, 59, 0.4) !important; /* slate-800/40 */
+  border-color: rgba(51, 65, 85, 0.5) !important;     /* slate-700/50 */
+}
+
+.dark #features-matrix .bg-slate-950 {
+  background-color: #ffffff !important;   /* Numbers box block becomes white */
+  color: #0f172a !important;             /* Number text becomes dark */
+}
+
+.dark #features-matrix .bg-slate-100 {
+  background-color: #1e293b !important;
+  color: #000000 !important;
+  border-color: #334155 !important;
+}
+
+

@@ -136,7 +136,7 @@ window.addEventListener('DOMContentLoaded', () => {
             if (dom.cardSpent) dom.cardSpent.className = "bg-red-500/[0.08] border border-red-500/20 rounded-3xl p-5 flex flex-col justify-between min-h-[110px] transition-all duration-300";
             if (dom.labelSpent) dom.labelSpent.className = "text-[10px] font-bold text-red-700 uppercase tracking-wider";
             if (dom.alertTextSpent) {
-                dom.alertTextSpent.className = "text-xxs text-red-600/80 font-bold mt-0.5 animate-pulse";
+                dom.alertTextSpent.className = "text-xxs text-red-600/80 font-bold mt-0.5 animate-pulse ";
                 dom.alertTextSpent.textContent = "CRITICAL LIMIT BREACHED - ASSET RISK";
             }
         } else {
@@ -278,26 +278,34 @@ window.addEventListener('DOMContentLoaded', () => {
                 : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
 
             const row = document.createElement('div');
-            row.className = `flex items-center justify-between p-4 rounded-2xl border ${borderAlertClass} transition-all duration-150`;
-            row.innerHTML = `
-                <div class="flex flex-col gap-0.5">
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-slate-900">${item.title}</span>
-                        ${isBreached ? '<span class="text-[8px] bg-red-600 text-white font-black px-1.5 py-0.5 rounded uppercase tracking-wider animate-pulse shadow-sm shadow-red-500/20">Category Breached</span>' : ''}
-                    </div>
-                    <div class="flex items-center gap-2 mt-1">
-                        <span class="text-[9px] font-bold text-slate-400 bg-slate-200/50 px-2 py-0.5 rounded uppercase tracking-wider">${item.category}</span>
-                        <span class="text-[9px] font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200/20">${item.date}</span>
-                    </div>
-                    ${item.remarks ? `<p class="text-[10px] text-slate-500 font-medium italic mt-1.5 bg-white/80 border border-slate-200/30 px-2.5 py-1 rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.01)] w-max max-w-xs truncate">Note: "${item.remarks}"</p>` : ''}
+        // FIX: Container changed to 'flex-col sm:flex-row sm:items-center' to stack stacked components vertically on mobile screens
+        row.className = `flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl border ${borderAlertClass} transition-all duration-150 gap-3 sm:gap-4`;
+        row.innerHTML = `
+            <!-- LEFT COMPONENT: Primary metadata block containing titles, category badges, and notes -->
+            <!-- FIX: Added 'w-full' to prevent absolute layout breakdown on smaller devices -->
+            <div class="flex flex-col gap-0.5 w-full">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-bold text-slate-900">${item.title}</span>
+                    ${isBreached ? '<span class="text-[8px] bg-red-600 text-white font-black px-1.5 py-0.5 rounded uppercase tracking-wider animate-pulse shadow-sm shadow-red-500/20">Category Breached</span>' : ''}
                 </div>
-                <div class="flex items-center gap-4">
-                    <span class="text-xs font-black px-2.5 py-1 rounded-xl monvael-price-pill tracking-tight">${formatCurrency(item.amount)}</span>
-                    <button onclick="deleteExpense(${item.id})" class="text-slate-600 hover:text-red-500 font-bold text-xs p-1 transition-colors">✕</button>
+                <div class="flex flex-wrap items-center gap-2 mt-1">
+                    <span class="text-[9px] font-bold text-slate-400 bg-slate-500/40 dark:bg-slate-200/10 px-2 py-0.5 rounded uppercase tracking-wider">${item.category}</span>
+                    <span class="text-[9px] font-bold text-slate-400 bg-slate-300 dark:bg-slate-500/10 px-1.5 py-0.5 rounded border border-slate-200/20">${item.date}</span>
                 </div>
-            `;
-            dom.ledgerStreamContainer.appendChild(row);
-        });
+                <!-- FIX: Replaced 'w-max' with 'w-full sm:w-max' and added explicit bounds to safe truncate inside adaptive boxes -->
+                ${item.remarks ? `<p class="text-[10px] text-slate-200 dark:bg-slate-800 font-medium italic mt-1.5 bg-white/80 border border-slate-200/30 px-2.5 py-1 rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.01)] w-full sm:w-max max-w-full sm:max-w-xs truncate">Note: "${item.remarks}"</p>` : ''}
+            </div>
+            
+            <!-- RIGHT COMPONENT: Secondary control block holding pricing metrics and context deletions -->
+            <!-- FIX: Added 'justify-between sm:justify-end w-full sm:w-auto' so price and delete button sit beautifully inline on mobile -->
+            <div class="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto border-t sm:border-t-0 border-slate-100/50 pt-2 sm:pt-0">
+                <span class="text-xs font-black px-2.5 py-1 rounded-xl monvael-price-pill tracking-tight">${formatCurrency(item.amount)}</span>
+                <button onclick="deleteExpense(${item.id})" class="text-slate-600 hover:text-red-500 font-bold text-xs p-1 transition-colors cursor-pointer">✕</button>
+            </div>
+        `;
+        dom.ledgerStreamContainer.appendChild(row);
+                
+    });
     };
 
     if (dom.ledgerSearch) dom.ledgerSearch.addEventListener('input', (e) => renderLedgerRows(e.target.value));
@@ -665,6 +673,31 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+        // >>> SCRIPT.JS KE THEME EVENT MEIN IS DETECTOR HOOK KO ADD KARDO <<<
+        const mobileThemeBtn = document.getElementById('theme-toggle-btn-mobile');
+        if (mobileThemeBtn) {
+            mobileThemeBtn.addEventListener('click', () => {
+                const currentMode = document.documentElement.getAttribute('data-theme') || 'light';
+                const nextMode = currentMode === 'light' ? 'dark' : 'light';
+                applyAmbientThemeState(nextMode);
+                if (!dom.viewAnalytics.classList.contains('hidden')) renderAnalyticsCharts();
+            });
+        }
+
     // Fire default bootstrap sync loop
     applyAmbientThemeState(activeTheme);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const hamburgerBtn = document.getElementById("hamburger-menu-btn");
+  const navLinks = document.getElementById("nav-links");
+
+  if (hamburgerBtn && navLinks) {
+    hamburgerBtn.addEventListener("click", function () {
+      // Tailwind ki 'hidden' class ko toggle karega taaki mobile me menu dikhe/chupe
+      navLinks.classList.toggle("hidden");
+    });
+  }
+});
+
+

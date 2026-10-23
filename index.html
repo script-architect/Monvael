@@ -93,22 +93,30 @@
                 </div>
                 <div class="flex flex-col">
                     <h1 class="text-base font-extrabold tracking-tight text-slate-900 uppercase">Monvael</h1>
-                    <span class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Expense Management OS</span>
+                    <span class="text-xs md:text-xs text-slate-500 font-bold tracking-widest uppercase">Expense Management OS</span>
                 </div>
             </div>
 
-            <!-- Workflow Module Switcher Array -->
-            <nav class="flex items-center gap-1 bg-slate-200/60 p-1 rounded-2xl border border-slate-300/40">
-                <button id="tab-ledger" class="px-5 py-2 text-xs font-bold rounded-xl transition-all duration-150 bg-slate-900 text-white shadow-sm cursor-pointer">Ledger Workspace</button>
-                <button id="tab-analytics" class="px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-white/50 transition-all duration-150 cursor-pointer">Analytics Matrix</button>
-                <button id="tab-alarms" class="px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-white/50 transition-all duration-150 cursor-pointer">Alarms Engine</button>
-                <!-- Ambient Low-Profile Theme Control Toggle Bracket -->
-                <div >
-                    <button id="theme-toggle-btn" >
-                        🌓 Theme Mode
-                    </button>
-                </div> 
-            </nav>
+           
+                <nav class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1 bg-slate-200/30 p-1 rounded-2xl border border-slate-500/40">
+                
+                <!-- TAB BUTTONS CONTAINER (Mobile me hidden rahega, click par toggle hoga) -->
+                <div id="nav-links" class="hidden sm:flex flex-col sm:flex-row w-full sm:w-auto items-start sm:items-center gap-1 order-3 sm:order-1 mt-2 sm:mt-0">
+                    <button id="tab-ledger" class="w-full sm:w-auto px-5 py-2 text-xs font-semibold rounded-xl transition-all duration-150 bg-slate-900 text-white shadow-sm cursor-pointer text-left sm:text-center">Ledger Workspace</button>
+                    <button id="tab-analytics" class="w-full sm:w-auto px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-slate-700/20 transition-all duration-150 cursor-pointer text-left sm:text-center">Analytics Matrix</button>
+                    <button id="tab-alarms" class="w-full sm:w-auto px-5 py-2 text-xs font-semibold text-slate-600 rounded-xl hover:text-slate-900 hover:bg-slate-700/20 transition-all duration-150 cursor-pointer text-left sm:text-center">Alarms Engine</button>
+                </div>
+
+                <!-- RIGHT SIDE CONTROLS (Theme aur Hamburger) -->
+                <div class="flex items-center gap-2 order-2 ml-auto sm:ml-0">
+                    <button id="theme-toggle-btn" class="px-3 py-2 text-xs"> 🌓 Theme Mode </button>
+                    
+                    <!-- MOBILE HAMBURGER ACTION TRIGGER -->
+                    <button id="hamburger-menu-btn" class="sm:hidden p-2 text-slate-600 hover:bg-white/50 rounded-xl transition-all duration-150 text-base font-bold cursor-pointer"> ☰ </button>
+                </div>
+
+                </nav>
+
         </header>
 
         <!-- =========================================================================
@@ -179,7 +187,7 @@
                                     <input id="exp-amount" type="number" placeholder="0.00" required class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl pl-6 pr-2 py-2 text-xs font-bold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
                                 </div>
                             </div>
-                            <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl shadow-md transition-all h-[36px] self-end flex items-center justify-center cursor-pointer">Commit</button>
+                            <button type="submit" class=" border border-black text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover-bg-slate-900 dark:hover:text-white   font-bold text-xs rounded-xl shadow-md  transition-all h-[36px] self-end flex items-center justify-center cursor-pointer">Commit</button>
                         </div>
                     </form>
                 </div>
@@ -224,40 +232,84 @@
 
             <!-- FULL STRETCH INTERACTIVE LEDGER REGISTRY STREAM BOARD -->
             <section class="w-full bg-white border border-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col gap-5">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-slate-100">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
                     <div>
-                        <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Asset Ledger Stream</h2>
-                        <p class="text-[10px] text-slate-400 font-medium mt-0.5">Real-time localized transactional memory metrics cache logs</p>
+                        <h2 class="text-lg font-bold text-slate-900 uppercase tracking-wider">Asset Ledger Stream</h2>
+                        <p class="text-xs text-slate-400 font-medium mt-0.5">Real-time localized transactional memory metrics cache logs</p>
                     </div>
-                    <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-                        <button id="undo-btn" class="px-3.5 py-2 text-xs font-bold rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-600 hover:text-slate-950 transition-all duration-150 flex items-center gap-1.5 hidden opacity-0">
-                            ↩️ Undo Action
+                <div>
+                    <div class="flex flex-wrap items-center gap-3 min-w-full sm:w-auto">
+    
+                    <!-- ================= UNDO BUTTON ================= -->
+                    <!-- Note: Aapke code me 'hidden opacity-0' laga hai, jab js se remove hoga tabhi dikhega -->
+                    
+
+                    <!-- ================= EXPORT CSV BUTTON ================= -->
+                    <div class="relative group">
+                        <button id="export-csv-btn" class=" cursor-pointer px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all flex items-center gap-1.5">
+                            ⬇️ Export Data
                         </button>
-                        <button id="export-csv-btn" class="px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all flex items-center gap-1.5">⬇️ Export CSV Data</button>
-                        <div class="relative w-full sm:w-64 flex items-center">
-                            <input id="ledger-search" type="text" placeholder="Filter by title, category, remarks..." class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-1.5 pl-9 text-xs font-semibold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
-                            <span class="absolute left-3 text-slate-400 font-bold text-xs">🔍</span>
+                        <!-- Tooltip -->
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-gray-900 text-white text-[10px] text-center rounded py-1.5 px-2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg z-50 whitespace-nowrap">
+                             Download Excel/CSV file 
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                         </div>
-                        <!-- =========================================================================
-                            JSON BACKUP & RESTORE UTILITY PIPELINE
-                            Allows absolute serverless session recovery across persistent backup matrices.
-                        ========================================================================= -->
-                        <div class="flex items-center gap-2">
-                            <!-- JSON Export Execution Action Trigger -->
-                            <button id="export-json-btn" class="px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-900 text-white hover:bg-slate-800 shadow-sm transition-all duration-150 flex items-center gap-1.5">
-                                📦 Export JSON Backup
-                            </button>
-                            
-                            <!-- JSON Import Interactive Action Trigger -->
-                            <button id="import-trigger-btn" class="px-3.5 py-2 text-xs font-bold rounded-xl bg-indigo-50 hover:bg-indigo-100/80 text-indigo-600 transition-all duration-150 flex items-center gap-1.5">
-                                📥 Upload Recovery File
-                            </button>
-                            
-                            <!-- Hidden native file picker bridge channel supporting only JSON extensions -->
-                            <input id="import-json-file" type="file" accept=".json" class="hidden">
+                    </div>
+
+                    <!-- ================= BACKUP (JSON EXPORT) BUTTON ================= -->
+                    <!-- FIX: Yahan 'relative group' joda hai -->
+                    <div class="relative group">
+                        <!-- JSON Export Execution Action Trigger -->
+                        <button id="export-json-btn" class=" cursor-pointer px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-900 text-white hover:bg-slate-800 shadow-sm transition-all duration-150 flex items-center gap-1.5">
+                            📦 Backup
+                        </button>
+                        <!-- Tooltip -->
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-[10px] text-center rounded py-1.5 px-2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg z-50">
+                            Download backup file
+                            <!-- Tooltip ka chota arrow -->
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                         </div>
+                    </div>    
+                    
+                    <!-- ================= RECOVER (JSON IMPORT) BUTTON ================= -->
+                    <!-- FIX: Yahan 'relative group' joda hai -->
+                    <div class="relative group">
+                        <!-- JSON Import Interactive Action Trigger -->
+                        <button id="import-trigger-btn" class=" cursor-pointer px-3.5 py-2 text-xs font-bold rounded-xl bg-indigo-50 hover:bg-indigo-100/80 text-indigo-600 transition-all duration-150 flex items-center gap-1.5">
+                            📥 Recover
+                        </button>
+                        <!-- Tooltip -->
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-[10px] text-center rounded py-1.5 px-2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg z-50">
+                            Upload the downloaded Backup File (JSON File)
+                            <!-- Tooltip ka chota arrow -->
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                        </div>
+                        <!-- Hidden native file picker bridge channel supporting only JSON extensions -->
+                        <input id="import-json-file" type="file" accept=".json" class="hidden">
+                    </div>
+
+                    <div>
+                        <button id="undo-btn" class=" cursor-pointer px-3.5 py-2 text-xs font-bold rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-600 hover:text-slate-950 transition-all duration-150 flex items-center gap-1.5 hidden opacity-0">
+                            ↩️ Undo 
+                        </button>
+                        <!-- Tooltip -->
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-gray-900 text-white text-[10px] text-center rounded py-1.5 px-2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg z-50 whitespace-nowrap">
+                            Undo last action
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <!-- ================= SEARCH INPUT ================= -->
+                    <div class=" relative order-x pt-1.5  w-full sm:w-64 flex items-center  sm:justify-self-end">
+                        <input id="ledger-search" type="text" placeholder="Filter by title, category, remarks..." class="w-full  bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-1.5 pl-9 text-xs font-semibold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
+                        <span class="absolute left-3 text-slate-400 font-bold text-xs">🔍</span>
                     </div>
                 </div>
+
+                </div>
+                
                 <div class="w-full overflow-x-auto">
                     <div id="ledger-stream-container" class="flex flex-col gap-2.5 max-h-[320px] overflow-y-auto pr-1"></div>
                 </div>
@@ -338,60 +390,155 @@
             </section>
         </div>
 
+        <!-- PREMIUM B&W SEO USE-CASES & FEATURE MATRIX START -->
+<section id="features-matrix" class="mt-16 p-6 bg-white border border-slate-300 rounded-2xl text-slate-900 font-sans">
+  
+  <!-- Header Section -->
+  <div class="text-center max-w-3xl mx-auto mb-12">
+    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 mb-3 tracking-tight">Next-Generation Capital Tracking & Runway Analytics</h2>
+    <p class="text-slate-600 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+      Discover how founders, corporate professionals, and personal finance users leverage the Monvael engine for zero-friction asset logging.
+    </p>
+  </div>
 
-    <footer class="bg-slate-950 border-t border-slate-900 text-slate-400 py-12 px-6 sm:px-12 md:px-24">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-            
-            
-            <div class="space-y-4">
-                <div class="flex items-center space-x-3">
-                    <img src="images/logo.png" alt="Monvael Logo" class="h-8 w-8 object-contain">
-                    <span class="text-xl font-bold tracking-tight text-white">Monvael<span class="text-emerald-500">OS</span></span>
-                </div>
-                <p class="text-sm leading-relaxed text-slate-500 max-w-sm">
-                    Next-generation daily expense matrix, micro-budget planner, and corporate runway analytics engine. Zero login barriers. Pure local storage compliance.
-                </p>
-                <div class="text-xs text-slate-600">
-                    &copy; 2026 Monvael Architecture Team. All rights reserved.
-                </div>
-            </div>
+  <!-- 2x2 Clean Grid Matrix -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+    
+    <!-- Quadrant 1: Startup & Runway Analytics -->
+    <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl hover:border-slate-400 transition-all duration-200 flex flex-col justify-between">
+      <div>
+        <div class="w-8 h-8 rounded-lg bg-slate-950 flex items-center justify-center text-white text-xs font-bold mb-4">01</div>
+        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Startup Burn Rate Calculator & Runway Tracker</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Log real-time micro-burn parameters and corporate expense points. Calculate your precise **corporate operational burn rate** and analyze your **active financial runway matrix** instantly without setting up heavy accounting dashboards. Perfect for fast-scaling SaaS founders.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-slate-200/60 text-[10px] text-slate-500 font-mono">Index Vector: /runway-analytics</div>
+    </div>
 
-            <!-- Column 2: Quick Index Nav -->
-            <div class="space-y-4 md:pl-12">
-                <h4 class="text-sm font-semibold tracking-wider uppercase text-slate-300">Workspace Index</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Ledger Stream</a></li>
-                    <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Velocity Grid</a></li>
-                    <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Threshold Alarms</a></li>
-                    <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">CSV Tax Exporter</a></li>
-                </ul>
-            </div>
+    <!-- Quadrant 2: Advanced Threshold Engine & Alarms -->
+    <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl hover:border-slate-400 transition-all duration-200 flex flex-col justify-between">
+      <div>
+        <div class="w-8 h-8 rounded-lg bg-slate-950 flex items-center justify-center text-white text-xs font-bold mb-4">02</div>
+        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Threshold Allocation Alarms Engine</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Enforce rigid custom micro-maximum parameters to guard specific target categories. Configure operational boundary limits, allocate capital caps, and trigger **localized category allocation threshold alarms** the moment your spending velocity crosses safe limits.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-slate-200/60 text-[10px] text-slate-500 font-mono">Index Vector: /alarms-engine</div>
+    </div>
 
-            <!-- Column 3: Premium Advertisement Workspace Slot -->
-            <div class="space-y-4">
-                <h4 class="text-sm font-semibold tracking-wider uppercase text-slate-300">Sponsorship & Advertising</h4>
-                <div class="bg-slate-900/60 border border-slate-900 rounded-xl p-5 space-y-4 backdrop-blur-md">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded-md border border-emerald-500/20">Slot Open</span>
-                        <span class="text-xs text-slate-500">1250x100 Premium Spot</span>
-                    </div>
-                    <div class="space-y-1">
-                        <p class="text-sm font-medium text-slate-200">Advertise Your Brand Here</p>
-                        <p class="text-xs text-slate-500 leading-normal">Target thousands of CAs, startup founders, and personal finance users daily on their core transaction matrix dashboard.</p>
-                    </div>
-                    
-                    <!-- Email Trigger Link with Pre-filled Professional Body and Subject -->
-                    <a href="mailto:connectpriyanshu.co@gmail.com," 
-                    class="block text-center w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 text-sm font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 shadow-lg shadow-emerald-500/10 hover:shadow-emerald-600/20 transform hover:-translate-y-0.5">
-                        Book Advertisement Slot
-                    </a>
-                </div>
-            </div>
+    <!-- Quadrant 3: CSV Data Exporter & CA Compliance -->
+    <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl hover:border-slate-400 transition-all duration-200 flex flex-col justify-between">
+      <div>
+        <div class="w-8 h-8 rounded-lg bg-slate-950 flex items-center justify-center text-white text-xs font-bold mb-4">03</div>
+        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Office Expense CSV & JSON Exporter</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Eliminate manual tax logging errors. Utilize the high-performance **CSV tax exporter tool** to generate Excel-compliant operational reports. Seamlessly back up transactional history with secure **JSON recovery file uploads** built for audit-ready compliance.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-slate-200/60 text-[10px] text-slate-500 font-mono">Index Vector: /tax-export</div>
+    </div>
 
+    <!-- Quadrant 4: Zero Login Privacy Architecture -->
+    <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl hover:border-slate-400 transition-all duration-200 flex flex-col justify-between">
+      <div>
+        <div class="w-8 h-8 rounded-lg bg-slate-950 flex items-center justify-center text-white text-xs font-bold mb-4">04</div>
+        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Privacy-First Local Storage Compliance</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Experience a full-scale **free money manager tool** featuring **zero login barriers**. Your data stays entirely inside your browser's localized transactional memory metrics cache logs. Total data ownership with pure local storage security framework compliance.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-slate-200/60 text-[10px] text-slate-500 font-mono">Index Vector: /local-privacy</div>
+    </div>
+
+  </div>
+
+  <!-- Hidden SEO Metadata Node for Crawlers -->
+  <div class="sr-only">
+    Keywords: free expense tracker browser extension, saas cash flow ledger grid, personal finance weekly expense velocity grid, calculate cash runway free tool, automated income tax expense tracker.
+  </div>
+</section>
+<!-- PREMIUM B&W SEO USE-CASES & FEATURE MATRIX END -->
+
+<!-- ==========================================
+     1. THE HIGH-CONVERTING AD MATRIX SLOT (MOBILE FRIENDLY + HYPER-THEMED)
+     ========================================== -->
+<div class="my-14 px-4 sm:px-6 max-w-5xl mx-auto font-sans">
+  <!-- Light theme: Elegant off-white gradient | Dark theme: Pure black velvet glass -->
+  <div class="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-50 to-white dark:from-black dark:to-slate-950 border border-slate-200 dark:border-slate-800 transition-all duration-300 shadow-sm hover:shadow-md dark:hover:border-slate-700">
+    
+    <!-- Ambient Blur Glow effect inside the card for premium feel -->
+    <div class="absolute -top-12 -right-12 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+
+    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+      
+      <!-- Copywrite text wrapper -->
+      <div class="space-y-2 max-w-2xl">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-[9px] font-mono font-bold tracking-widest uppercase px-2.5 py-0.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-md border border-emerald-500/20">
+            Sponsorship Matrix Open
+          </span>
+          <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono tracking-tight">1250x100 High-Visibility Placement</span>
         </div>
-    </footer>
+        
+        <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">
+          Accelerate Your Growth. Target Founders & Finance Professionals.
+        </h4>
+        
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Put your SaaS tool, fin-tech application, or developer API directly on the core dashboard panel. Engage thousands of daily **startup founders**, active **investors**, and **Chartered Accountants** calculating real-time **operational burn rates** and downloading transactional analytics.
+        </p>
+      </div>
+
+      <!-- Action conversion trigger button -->
+      <div class="w-full lg:w-auto shrink-0 pt-2 lg:pt-0">
+        <a href="mailto:connectpriyanshu.co@://gmail.com" 
+           class="block text-center w-full lg:w-auto bg-slate-950 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 text-white dark:text-slate-950 text-xs font-bold tracking-wider uppercase py-3.5 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-emerald-500/10 active:scale-[0.98]">
+          Book Dashboard Slot
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
+<!-- ==========================================
+     2. THE MINIMALIST LUXURY DARK FOOTER (MOBILE FIRST + SEO DRIVEN)
+     ========================================== -->
+<footer class="w-full bg-slate-950 border-t border-slate-900/60 pt-16 pb-12 px-6 sm:px-12 md:px-24 font-sans text-slate-400">
+  <div class="max-w-5xl mx-auto">
+    
+    <!-- Primary Content Columns Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 items-start mb-12">
+        
+        
+        <div class="md:col-span-5 space-y-4">
+            <div class="flex items-center space-x-2">
+                <img src="images/logo.png" alt="Monvael Logo" class="h-6 w-6 object-contain filter brightness-110">
+                <span class="text-base font-bold tracking-tight text-white">Monvael<span class="text-slate-500 font-normal">OS</span></span>
+            </div>
+            <p class="text-xs leading-relaxed text-slate-400 max-w-xs">
+                A localized **startup burn rate tracker**, micro-budget metrics engine, and optimized **office expense CSV export database**. Zero authentication layers, running pure local client storage compliance.
+            </p>
+        </div>
+
+
+
+    </div>
+
+    <!-- Bottom Metadata Terminal Row -->
+    <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-right justify-between gap-4 text-[10px] font-mono text-slate-600">
+        <div>&copy; 2026 Monvael Core Architecture. Open-source local asset.</div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Node Matrix: Operational Stable</span>
+        </div>
+    </div>
+
+  </div>
+</footer>
 
 
     </main>
