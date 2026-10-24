@@ -77,9 +77,9 @@ html, body {
     color: #000000 !important;
 }
 
-/* ==========================================================================
+/* =========================================================================
    4. Active Top Navigation Header Buttons (Pure Mono Strict Mode)
-   ========================================================================== */
+   ========================================================================= */
 
 /* Dark mode basic state for navbar buttons */
 [data-theme="dark"] nav button, .dark nav button,
@@ -102,7 +102,6 @@ html, body {
     font-weight: 800 !important;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1) !important;
 }
-
 
 /* Dark mode hover interactions */
 [data-theme="dark"] nav button:not(.active):hover, .dark nav button:not(.active):hover,
@@ -197,7 +196,7 @@ html, body {
 .dark #features-matrix {
   background-color: #0f172a !important; /* slate-900 */
   border-color: #334155 !important;     /* slate-700 */
-  color: #000000 !important;             /* slate-100 */
+  color: #ffffff !important;             /* Fixed contrast clash */
 }
 
 .dark #features-matrix h2, 
@@ -221,8 +220,113 @@ html, body {
 
 .dark #features-matrix .bg-slate-100 {
   background-color: #1e293b !important;
-  color: #000000 !important;
+  color: #ffffff !important;
   border-color: #334155 !important;
 }
 
+/* ==========================================
+   MONVAEL OS: ALARMS FORM HYPER-DARK OVERRIDES (FIXED SELECTORS CONTRAST)
+   ========================================== */
 
+/* Main form area container default framework reset */
+.dark #alarm-form {
+    background-color: #000000 !important;             /* Pure premium pitch black velvet */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important; /* Super thin surgical white grid border */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8) !important; /* Low profile deep shadow effect */
+}
+
+/* Headings inside form (Arm Allocation Rule) */
+.dark #alarm-form span.text-slate-900,
+.dark #alarm-form span {
+    color: #ffffff !important;                        /* Pure high-contrast silver white */
+}
+
+/* Form Label vectors (Target Category Vector, etc.) */
+.dark #alarm-form label {
+    color: #94a3b8 !important;                        /* Readable soft slate gray */
+    opacity: 0.9 !important;
+}
+
+/* Interactive Input Elements Framework Integration */
+.dark #alarm-category,
+.dark #alarm-limit {
+    background-color: #0b0f19 !important;             /* Deep tactical background for inner boxes */
+    border: 1px solid rgba(255, 255, 255, 0.25) !important; /* Clean defined vector edge line */
+    color: #ffffff !important;                        /* High contrast input data values */
+}
+
+/* Safe Placeholder text mapping configuration */
+.dark #alarm-limit::placeholder {
+    color: #475569 !important;                        /* Highly visible dark slate indicator text */
+    opacity: 1 !important;
+}
+
+/* Currency Icon Adjuster Vector */
+.dark #alarm-form .absolute.left-3 {
+    color: #94a3b8 !important;                        /* Crisp and bright currency identifier */
+}
+
+/* Submit Trigger Button tactile hardware inversion */
+.dark #alarm-form button[type="submit"] {
+    background-color: #ffffff !important;             /* Crisp solid structural white block button */
+    color: #000000 !important;                        /* Deep rich black font overlay */
+    font-weight: 900 !important;
+    border: 1px solid #ffffff !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+.dark #alarm-form button[type="submit"]:hover {
+    background-color: #e2e8f0 !important;             /* Interactive premium tracking response */
+    border-color: #e2e8f0 !important;
+}
+
+/* =========================================================================
+   MONVAEL OS: CONTRAST MATRIX OVERRIDES FOR DYNAMIC SEO INFRASTRUCTURE
+   ========================================================================= */
+
+/* Main SEO Box Dark Theme Container Mapping */
+[data-theme="dark"] #mv-seo-matrix, 
+.dark #mv-seo-matrix {
+    background-color: var(--card-bg) !important;                /* Deepest Solid Obsidian Card Matrix */
+    border-color: var(--border-line) !important;                /* Surgical ultra-thin high-contrast line */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9) !important; /* Premium clean SaaS bounding drop shadow */
+}
+
+/* Primary Title Typography Vectors */
+[data-theme="dark"] #mv-seo-matrix .mv-seo-title,
+.dark #mv-seo-matrix .mv-seo-title {
+    color: var(--text-main) !important;                         /* Pure Crisp White Heading Text */
+}
+
+/* Descriptive Paragraph Information Blocks */
+[data-theme="dark"] #mv-seo-matrix .mv-seo-text,
+.dark #mv-seo-matrix .mv-seo-text {
+    color: var(--text-sub) !important;                          /* Sharp silver-grey for high-fidelity logs */
+}
+
+/* Structural Data Badges & Inner Vector Indicators */
+[data-theme="dark"] #mv-seo-matrix .mv-seo-badge,
+.dark #mv-seo-matrix .mv-seo-badge {
+    background-color: var(--input-fill) !important;             /* Force pure ultra dark input pockets look */
+    border-color: var(--border-line) !important;
+    color: var(--text-sub) !important;
+}
+
+[data-theme="dark"] #mv-seo-matrix .mv-seo-vector,
+.dark #mv-seo-matrix .mv-seo-vector {
+    color: rgba(255, 255, 255, 0.35) !important;                /* Minimalist code vector terminal details */
+}
+
+/* Keywords Sidebar Box Inversion Matrix */
+[data-theme="dark"] #mv-seo-matrix .mv-seo-kw-box,
+.dark #mv-seo-matrix .mv-seo-kw-box {
+    background-color: rgba(255, 255, 255, 0.02) !important;    /* Sleek transparent tracking layer border */
+    border-color: var(--border-line) !important;
+    color: rgba(255, 255, 255, 0.4) !important;                /* Strict architectural semantic layout */
+}
+
+[data-theme="dark"] #mv-seo-matrix .mv-seo-kw-box span,
+.dark #mv-seo-matrix .mv-seo-kw-box span {
+    color: var(--text-sub) !important;                          /* Symmetrical tag alignment properties */
+}

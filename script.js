@@ -466,7 +466,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         </span>
                     </div>
                 </div>
-                <button onclick="disarmAlarm('${cat}')" class="text-xxs text-red-500 font-bold px-3 py-1.5 bg-red-50 hover:bg-red-100 rounded-xl transition-colors border border-red-200/30">Disarm</button>
+                <button onclick="disarmAlarm('${cat}')" class="text-xxs text-red-800 font-bold px-3 py-1.5 bg-red-50 hover:bg-red-500/80 hover:text-white rounded-xl transition-colors border border-red-200/30">Disarm</button>
             `;
             dom.alarmsRegistryContainer.appendChild(alarmNode);
         });
@@ -688,16 +688,148 @@ window.addEventListener('DOMContentLoaded', () => {
     applyAmbientThemeState(activeTheme);
 });
 
+/**
+ * Monvael OS - Context-Aware Semantic SEO & Knowledge Matrix Engine
+ * Orchestrates localized dynamic view optimizations without database overhead.
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const seoContainer = document.getElementById("dynamic-seo-content");
+  
+  // High-Performance Architectural Master Manifest Mapping Matrix Spans
+  const seoManifestRegistry = {
+    ledger: `
+      <div class="space-y-3 max-w-2xl text-left">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-[9px] font-mono font-black tracking-widest uppercase px-2.5 py-0.5 bg-slate-100 border border-slate-200/60 text-slate-600 rounded-md mv-seo-badge">CORE_LEDGER_STREAM</span>
+          <span class="text-[10px] text-slate-400 font-mono tracking-tight mv-seo-vector">Index Vector: /runway-analytics</span>
+        </div>
+        <h4 class="text-sm font-black text-slate-900 uppercase tracking-wide tracking-tight mv-seo-title">Startup Burn Rate Calculator & Real-Time Cash Ledger Grid</h4>
+        <p class="text-xs text-slate-500 leading-relaxed font-normal mv-seo-text">
+          Log macro-burn parameters and analyze your precise <strong>corporate operational burn rate</strong> instantly. Monvael's browser-localized compliance framework functions as a zero-latency financial logging console, generating an active <strong>financial runway matrix</strong> for scaling SaaS founders and corporate developers without configuring clunky database infrastructures or third-party authentication barriers.
+        </p>
+      </div>
+      <div class="text-[10px] font-mono text-slate-400 border border-slate-200/60 rounded-xl p-3.5 bg-slate-50/50 shrink-0 select-none md:max-w-[240px] text-left leading-normal mv-seo-kw-box">
+        <span class="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 font-sans">Indexed Latent Terms</span>
+        Keywords: startup burn rate tracker, calculate cash runway free tool, corporate cash flow ledger app, office expense tracker browser app, local asset logging console.
+      </div>
+    `,
+    analytics: `
+      <div class="space-y-3 max-w-2xl text-left">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-[9px] font-mono font-black tracking-widest uppercase px-2.5 py-0.5 bg-slate-100 border border-slate-200/60 text-slate-600 rounded-md mv-seo-badge">ANALYTICS_MATRIX</span>
+          <span class="text-[10px] text-slate-400 font-mono tracking-tight mv-seo-vector">Index Vector: /velocity-stream</span>
+        </div>
+        <h4 class="text-sm font-black text-slate-900 uppercase tracking-wide tracking-tight mv-seo-title">Weekly Expense Velocity Grid & Cash Flow Consumption Analytics</h4>
+        <p class="text-xs text-slate-500 leading-relaxed font-normal mv-seo-text">
+          Track localized capital consumption patterns as they execute inside the terminal layer. The specialized <strong>weekly expense velocity grid</strong> processes dynamic trend trajectories utilizing hardware-accelerated animated pillar components. Discover peak spend variables, isolate lifestyle overhead allocations, and monitor encrypted <strong>transactional memory cache statistics</strong> via a pure minimalist layout grid.
+        </p>
+      </div>
+      <div class="text-[10px] font-mono text-slate-400 border border-slate-200/60 rounded-xl p-3.5 bg-slate-50/50 shrink-0 select-none md:max-w-[240px] text-left leading-normal mv-seo-kw-box">
+        <span class="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 font-sans">Indexed Latent Terms</span>
+        Keywords: saas cash flow ledger grid, personal finance weekly expense velocity, analyze trend trajectories, transactional memory statistics tracker, browser spending charts.
+      </div>
+    `,
+    alarms: `
+      <div class="space-y-3 max-w-2xl text-left">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-[9px] font-mono font-black tracking-widest uppercase px-2.5 py-0.5 bg-slate-100 border border-slate-200/60 text-slate-600 rounded-md mv-seo-badge">SENTINEL_MONITOR</span>
+          <span class="text-[10px] text-slate-400 font-mono tracking-tight mv-seo-vector">Index Vector: /alarms-engine</span>
+        </div>
+        <h4 class="text-sm font-black text-slate-900 uppercase tracking-wide tracking-tight mv-seo-title">Localized Category Allocation Threshold Alarms & Budget Sentinel</h4>
+        <p class="text-xs text-slate-500 leading-relaxed font-normal mv-seo-text">
+          Enforce rigid boundary parameters to isolate custom asset categories against systemic operational overflow. Monvael's autonomous <strong>threshold allocation alarms engine</strong> lets independent financial advisors and tax consultants configure strict maximum allocation caps on targeted sectors, triggering automated local sentinel warnings the precise millisecond spending metrics breach parameters.
+        </p>
+      </div>
+      <div class="text-[10px] font-mono text-slate-400 border border-slate-200/60 rounded-xl p-3.5 bg-slate-50/50 shrink-0 select-none md:max-w-[240px] text-left leading-normal mv-seo-kw-box">
+        <span class="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 font-sans">Indexed Latent Terms</span>
+        Keywords: automated income tax expense tracker, free money manager tool browser extension, custom budget threshold alarms, localized category allocation caps.
+      </div>
+    `
+  };
+
+  /**
+   * Executes smooth opacity transitions to hot-swap content matrices
+   * @param {string} viewKey - Target system state key mapped inside the registry
+   */
+  function shiftDynamicSeoPayload(viewKey) {
+    if (seoContainer && seoManifestRegistry[viewKey]) {
+      seoContainer.style.opacity = "0";
+      setTimeout(function () {
+        seoContainer.innerHTML = seoManifestRegistry[viewKey];
+        seoContainer.style.opacity = "1";
+      }, 140);
+    }
+  }
+
+  // Hook workspace dynamic routing changes into dashboard trigger nodes safely
+  const navLedgerNode = document.getElementById("tab-ledger");
+  const navAnalyticsNode = document.getElementById("tab-analytics");
+  const navAlarmsNode = document.getElementById("tab-alarms");
+
+  if (navLedgerNode) navLedgerNode.addEventListener("click", function () { shiftDynamicSeoPayload("ledger"); });
+  if (navAnalyticsNode) navAnalyticsNode.addEventListener("click", function () { shiftDynamicSeoPayload("analytics"); });
+  if (navAlarmsNode) navAlarmsNode.addEventListener("click", function () { shiftDynamicSeoPayload("alarms"); });
+
+  // Default configuration init execution on operational launch
+  shiftDynamicSeoPayload("ledger");
+});
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const hamburgerBtn = document.getElementById("hamburger-menu-btn");
   const navLinks = document.getElementById("nav-links");
+  const navButtons = document.querySelectorAll(".nav-target-btn");
 
   if (hamburgerBtn && navLinks) {
-    hamburgerBtn.addEventListener("click", function () {
-      // Tailwind ki 'hidden' class ko toggle karega taaki mobile me menu dikhe/chupe
-      navLinks.classList.toggle("hidden");
+    
+    // Toggle on mobile
+    hamburgerBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (window.innerWidth < 640) {
+        if (navLinks.style.display === "flex") {
+          navLinks.style.setProperty("display", "none", "important");
+        } else {
+          navLinks.style.setProperty("display", "flex", "important");
+          navLinks.style.setProperty("flex-direction", "column", "important");
+          navLinks.style.setProperty("width", "100%", "important");
+        }
+      }
+    });
+
+    // Auto close menu on button select
+    navButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        if (window.innerWidth < 640) {
+          navLinks.style.setProperty("display", "none", "important");
+        }
+      });
+    });
+
+    
+
+    // Close menu on backdrop tap
+    document.addEventListener("click", function (e) {
+      if (window.innerWidth < 640 && !navLinks.contains(e.target) && e.target !== hamburgerBtn) {
+        navLinks.style.setProperty("display", "none", "important");
+      }
+    });
+
+    
+
+    // Device responsive reset guardrail
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 640) {
+        navLinks.style.removeProperty("display");
+        navLinks.style.removeProperty("flex-direction");
+        navLinks.style.removeProperty("width");
+      } else {
+        navLinks.style.setProperty("display", "none", "important");
+      }
     });
   }
+
+  
 });
+
 
 
