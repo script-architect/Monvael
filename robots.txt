@@ -1,17 +1,30 @@
 # =========================================================================
 # MONVAEL ROBOTS INFRASTRUCTURE CORE DIRECTIVES MATRIX
-# Designed for maximum optimized indexation parameters.
+# Highly optimized for search engines, AI models, and maximum organic traffic.
+# Target: https://monvael.in
 # =========================================================================
 
 User-agent: *
 Allow: /
 Allow: /index.html
-Allow: /script.js
 Allow: /style.css
+Allow: /script.js
+Allow: /images/
 
-# Block local staging files or temp logs if any exist
+# Specific directives for top AI Search Assistants (ChatGPT, Claude, Gemini)
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+# Block local staging files, dynamic configs, or temp logs
 Disallow: /temp/
 Disallow: /config/
+Disallow: /build/
 
-# Global Target XML Index Pointer Map
-Sitemap: https://monvael.vercel.app/
+# Global Target XML Index Pointer Map (Fixed Domain Pipeline)
+Sitemap: https://monvael.in/sitemap.xml

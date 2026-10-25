@@ -1,11 +1,13 @@
 {
+  "version": 2,
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com/@tailwindcss/browser@4; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self' data:; base-uri 'self'; form-action 'self';"
+          "key": "X-ECID-Context",
+          "value": "monvael-infrastructure-secure-ledger"
         },
         {
           "key": "X-Frame-Options",
@@ -16,8 +18,21 @@
           "value": "nosniff"
         },
         {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
+          "key": "Permissions-Policy",
+          "value": "interest-cohort=()"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(index.html|sitemap.xml|robots.txt)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     }

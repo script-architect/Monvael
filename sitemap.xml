@@ -3,32 +3,26 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-    <!-- Monvael OS — Financial Analytics Workspace -->
+    <!-- Monvael OS — Financial Analytics Workspace & Burn Matrix -->
     <url>
-        <loc>https://monvael.vercel.app/</loc>
-        <lastmod>2026-10-21</lastmod>
+        <loc>https://monvael.in/</loc>
+        <lastmod>2026-10-25</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
 
-        <!-- Main Dashboard / Product Preview -->
+        <!-- Main Dashboard SEO Engine / Product Preview -->
         <image:image>
-            <image:loc>https://monvael.vercel.app/images/siteview.png</image:loc>
-            <image:title>Monvael OS Financial Analytics Dashboard</image:title>
-            <image:caption>
-                Monvael OS — next-generation financial analytics workspace,
-                expense tracking, budget planning and corporate burn monitoring dashboard.
-            </image:caption>
+            <image:loc>https://monvael.in</image:loc>
+            <image:title>Monvael OS Startup Operational Burn Analytics Dashboard Matrix</image:title>
+            <image:caption>Monvael OS — Professional-grade financial runway calculator, personal expense ledger node, and automated office overhead CSV database engine.</image:caption>
         </image:image>
 
-        <!-- Monvael OS Brand Logo -->
+        
         <image:image>
-            <image:loc>https://monvael.vercel.app/images/logo.png</image:loc>
-            <image:title>Monvael OS Logo</image:title>
-            <image:caption>
-                Monvael OS — intelligent financial analytics and expense management platform.
-            </image:caption>
+            <image:loc>https://monvael.in</image:loc>
+            <image:title>Monvael OS Official  Logo</image:title>
+            <image:caption>Monvael OS — Localized zero-login compliance transactional memory system ledger.</image:caption>
         </image:image>
-
     </url>
 
 </urlset>

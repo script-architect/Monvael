@@ -330,3 +330,45 @@ html, body {
 .dark #mv-seo-matrix .mv-seo-kw-box span {
     color: var(--text-sub) !important;                          /* Symmetrical tag alignment properties */
 }
+/* ==========================================================================
+   Monvael OS - Standalone Premium Glossy Alert Card Engine
+   ========================================================================== */
+
+@keyframes standaloneCardGlow {
+  0%, 100% {
+    color: #e11d48; /* Crimson Accent */
+    background-color: rgba(255, 255, 255, 0.95); /* Crisp Clean White Block */
+    border-color: rgba(225, 29, 72, 0.25); /* Sharp glowing thin border */
+    box-shadow: 0 4px 20px -2px rgba(225, 29, 72, 0.08), 0 2px 6px -1px rgba(225, 29, 72, 0.04);
+  }
+  50% {
+    color: #9f1239; /* Deep Blood Red Accent */
+    background-color: rgba(254, 242, 242, 0.98); /* Ultra-premium smooth red tint blush */
+    border-color: rgba(225, 29, 72, 0.45); /* High-contrast border breathe */
+    box-shadow: 0 10px 30px -3px rgba(225, 29, 72, 0.18), 0 4px 12px -2px rgba(225, 29, 72, 0.1);
+  }
+}
+
+/* Dark Mode Deep Neon Cyberpunk Configuration Override */
+@media (prefers-color-scheme: dark) {
+  @keyframes standaloneCardGlow {
+    0%, 100% {
+      color: #fda4af; /* Soft Pastel Velvet Rose */
+      background-color: rgba(9, 9, 11, 0.85); /* Deep OLED Charcoal Black */
+      border-color: rgba(251, 113, 133, 0.25);
+      box-shadow: 0 4px 25px -5px rgba(251, 113, 133, 0.1), 0 0 10px rgba(251, 113, 133, 0.05);
+    }
+    50% {
+      color: #fb923c; /* Cyberpunk High-Contrast Amber-Orange */
+      background-color: rgba(24, 24, 27, 0.95); /* Fluid Pure Black Frame */
+      border-color: rgba(251, 146, 60, 0.5); /* Glowing Amber Matrix Ring */
+      box-shadow: 0 12px 40px -4px rgba(251, 146, 60, 0.25), 0 0 20px rgba(251, 146, 60, 0.15);
+    }
+  }
+}
+
+/* Master Activation Layer */
+.warning-standalone-banner {
+  animation: standaloneCardGlow 4s ease-in-out infinite;
+  will-change: color, background-color, border-color, box-shadow;
+}

@@ -1,0 +1,17 @@
+{
+  "short_name": "Monvael",
+  "name": "Monvael OS — Financial Analytics Ledger",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#09090b",
+  "theme_color": "#e11d48",
+  "display": "standalone",
+  "orientation": "portrait"
+}
