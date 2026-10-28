@@ -7,7 +7,6 @@
 
         <!-- Primary SEO Meta Elements-->
         <title>Monvael OS | Free Expense Tracker & Startup Burn Rate Engine</title>
-        <link rel="icon" type="image/png" href="https://monvael.in/images/logo.png">
         <meta name="title" content="Monvael OS | Free Expense Tracker & Startup Burn Rate Engine">
         <meta name="description" content="Free, secure, and instant financial ledger dashboard. Track daily kharcha, calculate corporate startup burn rate, and download clean CSV data reports instantly. Zero login required.">
         
@@ -180,7 +179,6 @@
                             <label for="exp-title" class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Item Description</label>
                             <input id="exp-title" type="text" placeholder="e.g., Infrastructure Bills" required class="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-all">
                         </div>
-
                         <!-- Dropdown Field -->
                         <div class="flex flex-col gap-1.5">
                             <label for="exp-category" class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Category Vector</label>
@@ -190,21 +188,59 @@
                                     <option value="Travel & Fuel">Travel, Cab & Fuel</option>
                                     <option value="Rent & Living">Room Rent & PG</option>
                                     <option value="Groceries">Daily Groceries</option>
+                                    <option value="Dining Out">Restaurants & Swiggy/Zomato</option>
+                                    <option value="Clothing & Fashion">Apparel & Footwear</option>
+                                    <option value="Salon & Grooming">Personal Care, Salon & Spa</option>
+                                    <option value="Laundry & Househelp">Maid, Laundry & Cleaning</option>
+                                    <option value="Gifts & Celebrations">Birthdays, Weddings & Gifts</option>
+                                    <option value="Smoking & Nightlife">Parties, Drinks & Tobacco</option>
                                 </optgroup>
                                 <optgroup label="Utilities & Digital Bills">
                                     <option value="Recharge & Wifi">Mobile & Wi-Fi</option>
                                     <option value="Electricity">Electricity & Utilities</option>
                                     <option value="Entertainment">OTT & Subscriptions</option>
+                                    <option value="Water Bill">Water Supply & Tankers</option>
+                                    <option value="Gas Supply">LPG Cylinder & Piped Gas</option>
+                                    <option value="Software Apps">Premium Apps & Cloud Storage</option>
+                                    <option value="DTH & Cable">Cable TV & Set-Top Box</option>
                                 </optgroup>
                                 <optgroup label="Financial Liability & Assets">
                                     <option value="EMI & Loans">Car/Home EMI</option>
                                     <option value="Insurance">Insurance Premiums</option>
                                     <option value="Investments">Stocks & Mutual Funds</option>
+                                    <option value="Credit Card Bill">Credit Card Repayments</option>
+                                    <option value="Personal Loans">Hand Loan & Friendly Debt</option>
+                                    <option value="Gold & Crypto">Gold, Silver & Digital Assets</option>
+                                    <option value="Real Estate">Property Installments & Land</option>
+                                    <option value="Provident Funds">PPF, NPS & Govt Schemes</option>
                                 </optgroup>
                                 <optgroup label="Commercial & Business Operations">
                                     <option value="Office & Infrastructure">Office & Servers</option>
                                     <option value="Marketing">Marketing & Branding</option>
                                     <option value="Consultancy">Staff Wages & Fees</option>
+                                    <option value="Co-working Space">Desk Rent & Hub Fees</option>
+                                    <option value="SaaS & Dev Tools">API, GitHub, AWS & OpenAI Tools</option>
+                                    <option value="Legal & CA">CA, Filing Fees & Company Registration</option>
+                                    <option value="Business Travel">Client Meets & Corporate Flights</option>
+                                    <option value="Logistics & Shipping">Couriers, Freight & Packaging</option>
+                                    <option value="Inventory & Raw Material">Stock Procurement & Vendors</option>
+                                    <option value="Hardware & Gadgets">Laptops, Monitors & Office Tech</option>
+                                </optgroup>
+                                <optgroup label="Family, Health & Education">
+                                    <option value="Medical & Pharmacy">Medicines, Doctor Fees & Lab Tests</option>
+                                    <option value="Children Education">School/College Fees & Uniforms</option>
+                                    <option value="Parental Support">Remittance to Parents & Home Care</option>
+                                    <option value="Books & Courses">Skill Development & E-Learning</option>
+                                    <option value="Fitness & Gym">Gym Membership & Supplements</option>
+                                    <option value="Pet Care">Pet Food, Vet Bills & Grooming</option>
+                                </optgroup>
+                                <optgroup label="Miscellaneous & Emergency">
+                                    <option value="Cash Withdrawal">Atm Cash & Pocket Money</option>
+                                    <option value="Charity & Donations">Religious & Social Causes</option>
+                                    <option value="Challans & Fines">Traffic Fines & Penalties</option>
+                                    <option value="Unplanned Repairs">Vehicle Breakdown & Home Fixes</option>
+                                    <option value="Taxes">Income Tax, GST & Property Tax</option>
+                                    <option value="Others">Uncategorized Miscellaneous</option>
                                 </optgroup>
                             </select>
                         </div>
@@ -234,7 +270,7 @@
                         </div>
                     </form>
                 </div>
-            </section>
+            </section>gi
             <div style="background-color: #1b1b1bd2; border-left: 4px solid #0052cc; padding: 12px; margin-top: 15px; border-radius: 0 4px 4px 0;">
                 <p style="margin: 0; font-size: 15px; color: #ebe9e9;">
                     <strong>💡 Pro-Tip for Founders:</strong> Paying Staff Wages or Server Bills? 
@@ -445,14 +481,49 @@
                     </div>
                 </div>
             </section>
-        </div>
 
-        <!-- DYNAMIC METRICS SPECIFICATIONS GRID MATRIX (MAX-WIDTH 5XL COMPACT) -->
+            <div style="margin: 20px 0; display: flex; flex-direction: column; background: linear-gradient(135deg, #0b1528, #030712, #020617); border: 1px solid rgba(0, 138, 255, 0.2); border-left: 5px solid #008aff; padding: 22px; border-radius: 16px; box-shadow: 0 20px 30px -10px rgba(0, 138, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.05); position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.borderColor='#008aff'; this.style.boxShadow='0 20px 40px -5px rgba(0, 138, 255, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1)';" onmouseout="this.style.borderColor='rgba(0, 138, 255, 0.2)'; this.style.boxShadow='0 20px 30px -10px rgba(0, 138, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.05)';">
+                        
+                        <!-- Neon Aura Blur Effect behind Logo -->
+                        <div style="position: absolute; top: -20px; left: -20px; width: 100px; height: 100px; background: #008aff; filter: blur(60px); opacity: 0.25; pointer-events: none;"></div>
+                        
+                        <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 18px; width: 100%; flex-wrap: wrap; justify-content: space-between; position: relative; z-index: 1;">
+                            
+                            <!-- Content Left Side -->
+                            <div style="display: flex; align-items: flex-start; gap: 16px; min-width: 280px; flex: 1;">
+                                
+                                <!-- Text content -->
+                                <div>
+                                    <h4 style="font-weight: 700; font-size: 16px; color: #f4f4f5; margin: 6px 0 4px 0; font-family: system-ui, -apple-system, sans-serif; letter-spacing: -0.015em;">Tired of heavy server bills?</h4>
+                                    <p style="font-size: 13px; font-weight: 500; color: #9ca3af; margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.4;">Stop overpaying. Deploy your apps on DigitalOcean Droplets with $200 free cloud credits instantly.</p>
+                                    <a href="https://www.digitalocean.com/?refcode=43e7c0eb20cb&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge" style="padding-top:2px;"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" alt="DigitalOcean Referral Badge" /></a>
+                                </div>
+                            </div>
+
+                            <!-- CTA Button Right Side -->
+                            <div style="align-self: center; margin-left: auto; padding-top: 4px;">
+                                <a href="https://m.do.co/c/43e7c0eb20cb" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 12px; background: linear-gradient(135deg, #008aff, #0055ff); padding: 11px 20px; font-size: 13px; font-weight: 700; color: #ffffff; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 138, 255, 0.35); border: 1px solid rgba(255, 255, 255, 0.15); font-family: system-ui, -apple-system, sans-serif; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(0, 138, 255, 0.5)'; this.style.filter='brightness(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0, 138, 255, 0.35)'; this.style.filter='brightness(1)';">
+                                    Claim Free Credits
+                                    <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 14px; height: 14px; color: #ffffff;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                        </div>
+                 </div>
+
+            </div>
+
+
+
+            <!-- DYNAMIC METRICS SPECIFICATIONS GRID MATRIX (MAX-WIDTH 5XL COMPACT) -->
         <section id="mv-seo-matrix" class="my-16 px-6 max-w-5xl mx-auto font-sans bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 transition-all duration-300">
-        <div id="dynamic-seo-content" class="flex flex-col md:flex-row items-start justify-between gap-6 opacity-100 transition-opacity duration-200">
-            <!-- Automated architectural text layout segments inject here dynamically via browser script -->
-        </div>
+            <div id="dynamic-seo-content" class="flex flex-col md:flex-row items-start justify-between gap-6 opacity-100 transition-opacity duration-200">
+                <!-- Automated architectural text layout segments inject here dynamically via browser script -->
+            </div>
         </section>
+
 
 
         <!-- ==========================================
@@ -467,6 +538,8 @@
 
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
             
+                
+           
             <!-- Copywrite text wrapper -->
             <div class="space-y-2 max-w-2xl">
                 <div class="flex flex-wrap items-center gap-2">
