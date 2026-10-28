@@ -435,98 +435,139 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* =========================================================================
-       COMMERCIAL BLOB DATA EXPORT ENGINE (CLIENT-SIDE EXTRACTION MATRIX)
-       ========================================================================= */
-    if (dom.exportCsvBtn) {
+     if (dom.exportCsvBtn) {
         dom.exportCsvBtn.addEventListener('click', () => {
-            if(expenses.length === 0) {
+            if (expenses.length === 0) {
                 triggerToast("Operation canceled: Storage cache empty.", "warning");
                 return;
             }
-            
-            //create workbook engine
-            const workbook = XLSX.utils.book_new();
 
-            // conversion data matrix setup
-            // preparing baseline arrrays in whihc we will psiition dymanic grids
-            const rawReportRows = [];
-            
-            // helper logic to genrate blank spacer rows
-            const appendBlankRow = (count =1) => {
-                for (let i = 0; i < count; i++) rawReportRows.push([]);
-            };
-
-            //heaer hero container block
-            rawReportRows.push(["MONVAEL MANAGEMENT OS - PREMIUM EXPENSE REPORT LAYER"]);
-            rawReportRows.push([`Generated Runtime : ${new Date().toLocaleDateString()} | Active Currency Workspace : ${currentCurrency}`]);
-            appendBlankRow(2);
-
-            //Analaytics $ Insight Data Widget Matric
+            // Compute global matrix indicators metrics
             const totalSpent = expenses.reduce((sum, item) => sum + item.amount, 0);
             const activeRunway = capitalLimit - totalSpent;
 
-            rawReportRows.push(["FINANCIAL METRICS STATUS OVERVIEW"]);
-            rawReportRows.push(["Allocated Capital Limit", "Total Aggregate Burn", "Remaining Active Runway Status"]);
-            rawReportRows.push([capitalLimit, totalSpent, activeRunway]);
-            appendBlankRow(2);
-
-            // Color monitor legend keys matrix
-            rawReportRows.push(["REPORT COLOR CONDITIONAL MONITOR LEGEND INDICATORS"]);
-            rawReportRows.push(["[MAX SPEND BADGE]", "High-velocity operational burn transaction vector"]);
-            rawReportRows.push(["[MIN SPEND BADGE]", "Maximum structural baseline operational resource leak"]);
-            appendBlankRow(2);
-
-            //primary transaction data ledger table headers
-            rawReportRows.push(["LEDGER RECORD ENTRIES LOG STREAM"]);
-            rawReportRows.push(["Transaction ID", "Core Description/Title", "Category Vector", "Execution Date", "Granular Remarks/Notes", `Amount (${currentCurrency})`]);
-
-            //track elements parameters for dynamic highlight tracking loops
+            // Track boundaries limits for conditional row mesh generation arrays
             let maxAmount = -1;
             let minAmount = Infinity;
             expenses.forEach(item => {
-                if(item.amount > maxAmount) maxAmount = item.amount;
-                if(item.amount < minAmount) minAmount = item.amount;
+                if (item.amount > maxAmount) maxAmount = item.amount;
+                if (item.amount < minAmount) minAmount = item.amount;
             });
 
-            //populate records entries row arrays step-by-step
+            // Initialize structural XML/HTML document strings with clean corporate light styles
+            let excelTemplate = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://w3.org">
+                <head>
+                    <meta charset="utf-8"/>
+                    <!--[if gte mso 9]><xml><x:ExcelWorkbook><x:Worksheets><x:Worksheet><x:Name>Monvael Ledger</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:Worksheet></x:Worksheets></x:ExcelWorkbook></xml><![endif]-->
+                    <style>
+                        /* STANDARD LIGHT CORE TYPOGRAPHY RESET */
+                        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: #ffffff; color: #1e293b; }
+                        td { padding: 10px 14px; border: 1px solid #cbd5e1; font-size: 11px; vertical-align: middle; }
+                        
+                        /* CORPORATE HIGH-CONTRAST HEADER SUITE DESIGN */
+                        .brand-bar { font-size: 20px; font-weight: 800; background-color: #f8fafc; color: #0f172a; border-bottom: 3px solid #0284c7; padding: 20px 12px; text-transform: uppercase; }
+                        .brand-link { color: #0284c7; text-decoration: underline; font-weight: 800; font-size: 12px; }
+                        .section-banner { font-size: 13px; font-weight: 800; color: #1e293b; background-color: #f1f5f9; letter-spacing: 0.5px; border-bottom: 2px solid #64748b; padding-top: 15px; }
+                        .metric-header { font-weight: 800; background-color: #ffffff; color: #475569; font-size: 11px; text-transform: uppercase; }
+                        .metric-cell { font-weight: 800; font-size: 16px; background-color: #f8fafc; color: #0f172a; border-bottom: 2px solid #cbd5e1; }
+                        
+                        /* EXECUTIVE TABLE INFRASTRUCTURE */
+                        .ledger-header { font-weight: 800; font-size: 12px; background-color: #0f172a; color: #ffffff; text-align: center; border: 1px solid #0f172a; padding: 12px 14px; text-transform: uppercase; }
+                        .standard-row { background-color: #ffffff; color: #334155; }
+                        .price-tag { font-weight: 800; text-align: right; color: #0f172a; font-size: 12px; }
+                        
+                        /* PROFESSIONAL LIGHT CONDITIONAL STATUS HIGHLIGHTS */
+                        .max-burn-alert { background-color: #fee2e2 !important; color: #991b1b !important; font-weight: bold; }
+                        .min-burn-eco { background-color: #d1fae5 !important; color: #065f46 !important; font-weight: bold; }
+                    </style>
+                </head>
+                <body>
+                    <table>
+                        <!-- EXECUTIVE BRANDING PROTOCOL INTERFACE -->
+                        <tr><td colspan="6" class="brand-bar">📋 MONVAEL OS — BUSINESS RUNWAY INTELLIGENCE ENGINE</td></tr>
+                        <tr>
+                            <td colspan="3" style="background-color:#f8fafc; color:#64748b; font-size:10px; font-weight: 600;">Generated Logs: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</td>
+                            <td colspan="3" style="background-color:#f8fafc; text-align:right; font-size:11px;">
+                                <a href="https://monvael.in" target="_blank" class="brand-link">🌐 monvael.in</a>
+                            </td>
+                        </tr>
+                        <tr><td colspan="6" style="background-color:#ffffff; border:none; height:16px;"></td></tr>
+
+                        <!-- CAPITAL METRICS SNAPSHOT SNAP -->
+                        <tr><td colspan="6" class="section-banner">📌 CENTRAL PLATFORM LIQUIDITY STATEMENT</td></tr>
+                        <tr class="metric-header">
+                            <td colspan="2">Allocated Capital Limit</td>
+                            <td colspan="2">Total Aggregate Burn</td>
+                            <td colspan="2">Remaining Active Runway</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="metric-cell" style="color:#0f172a;">${formatCurrency(capitalLimit)}</td>
+                            <td colspan="2" class="metric-cell" style="color:#dc2626;">${formatCurrency(totalSpent)}</td>
+                            <td colspan="2" class="metric-cell" style="color:${activeRunway < 0 ? '#dc2626' : '#16a34a'};">${formatCurrency(activeRunway)}</td>
+                        </tr>
+                        <tr><td colspan="6" style="background-color:#ffffff; border:none; height:16px;"></td></tr>
+
+                        <!-- CONDITIONAL MATRIX LEGEND CODES -->
+                        <tr><td colspan="6" class="section-banner">🎨 MONITOR EXTREME TRAJECTORY INDICATORS</td></tr>
+                        <tr><td class="max-burn-alert" style="text-align:center; font-size: 11px;">🚨 MAXIMUM BURN</td><td colspan="5" style="background-color:#ffffff; color:#991b1b; font-weight: 600;">High-velocity operational burn transaction vector (Sabse Jyada Kharch)</td></tr>
+                        <tr><td class="min-burn-eco" style="text-align:center; font-size: 11px;">💚 SYSTEM OPTIMAL</td><td colspan="5" style="background-color:#ffffff; color:#065f46; font-weight: 600;">Minimum structural baseline operational resource leak (Sabse Kam Kharch)</td></tr>
+                        <tr><td colspan="6" style="background-color:#ffffff; border:none; height:16px;"></td></tr>
+
+                        <!-- PRIMARY TRANSACTION LOG STREAM TABLE -->
+                        <tr><td colspan="6" class="section-banner">📝 HISTORICAL TRANSACTION LEDGER ROWS</td></tr>
+                        <tr class="ledger-header">
+                            <td>Transaction ID</td>
+                            <td>Core Description / Title</td>
+                            <td>Category Vector</td>
+                            <td>Execution Date</td>
+                            <td>Granular Remarks / Notes</td>
+                            <td>Amount</td>
+                        </tr>
+            `;
+
+            // Sequential rows mapping logic loops with dynamic light class interceptors
             expenses.forEach(item => {
-                let statusLabel ="";
-                if (item.amount === maxAmount && expenses.length > 1) statusLabel = "[MAX SPEND BADGE] ";
-                if (item.amount === minAmount && expenses.length > 1) statusLabel = "[MIN SPEND BADGE] ";
+                let rowColorClass = 'class="standard-row"';
+                if (item.amount === maxAmount && expenses.length > 1) rowColorClass = 'class="max-burn-alert"';
+                else if (item.amount === minAmount && expenses.length > 1) rowColorClass = 'class="min-burn-eco"';
 
-                rawReportRows.push([
-                    item.id,
-                    statusLabel + item.title,
-                    item.category,
-                    item.date,
-                    item.remarks || "N/A",
-                    item.amount
-                ]);
+                excelTemplate += `
+                    <tr ${rowColorClass}>
+                        <!-- MSO text format rule loops prevent scientific digits exponential distortions completely -->
+                        <td style="mso-number-format:'\\@'; text-align:center; font-weight: 600; color: #475569;">${item.id}</td>
+                        <td style="font-weight: 600;">${item.title}</td>
+                        <td style="text-align:center; font-weight: 600;">${item.category}</td>
+                        <td style="text-align:center; color: #475569;">${item.date}</td>
+                        <td>${item.remarks || "N/A"}</td>
+                        <td class="price-tag">${formatCurrency(item.amount)}</td>
+                    </tr>
+                `;
             });
 
-            // COnvert matric array staraight into worksheet dta object
-            const worksheet = XLSX.utils.aoa_to_sheet(rawReportRows);
+            excelTemplate += `
+                    </table>
+                </body>
+                </html>
+            `;
 
-            // Advanced cel range design ^ structural properties
-            //automatically dynamic cell parameters layout width auto-caluculation logic
-            const colsConfiguration = [
-                { wch: 20 }, // ID Column
-                { wch: 30 }, // Description
-                { wch: 22 }, // category vector
-                { wch: 15 }, // date
-                { wch: 35 }, // remarks
-                { wch: 18 } // amount numeric field
-            ] ;
-            worksheet['!cols'] = colsConfiguration ;
+            // BLOB PIPELINE EXPORT INVOCATION ENGINE
+            const blobPackage = new Blob([excelTemplate], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+            const dataUrlReference = URL.createObjectURL(blobPackage);
 
-            // Excel binding and file export invocations
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Operational Burn Report");
+            // Execute automated browser downlader link attachment actions
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.href = dataUrlReference;
+            downloadAnchorNode.download = `monvael_executive_report_${Date.now()}.xls`;
+            
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            
+            // Garbage collection array optimizations
+            downloadAnchorNode.remove();
+            URL.revokeObjectURL(dataUrlReference);
 
-            // software auto genration tracking file trigger loop execution
-            XLSX.writeFile(workbook, `monvael_advanced_report_${Date.now()}.xlsx`);
-
-            triggerToast("Advanced financial analaysis Excel sheet downloaded successfully!");
+            triggerToast("Premium corporate light Excel sheet downloaded successfully!");
         });
     }
 
