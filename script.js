@@ -8,6 +8,45 @@ const KEYS = {
     ALARMS: 'monvael_category_alarms'
 };
 
+// --- CENTRAL GLOBAL MULTI-CURRENCY CONVERSION MATRIX ---
+const CURRENCY_CONFIG = {
+    INR: { symbol: "₹", locale: "en-IN", rate: 1 },
+    USD: { symbol: "$", locale: "en-US", rate: 0.012 },
+    EUR: { symbol: "€", locale: "de-DE", rate: 0.011 },
+    GBP: { symbol: "£", locale: "en-GB", rate: 0.0092 },
+    JPY: { symbol: "¥", locale: "ja-JP", rate: 1.83 },
+    AUD: { symbol: "A$", locale: "en-AU", rate: 0.018 },
+    CAD: { symbol: "C$", locale: "en-CA", rate: 0.017 },
+    CNY: { symbol: "¥", locale: "zh-CN", rate: 0.086 },
+    CHF: { symbol: "CHF", locale: "de-CH", rate: 0.010 },
+    SAR: { symbol: "ر.س", locale: "ar-SA", rate: 0.045 },
+    AED: { symbol: "د.إ", locale: "ar-AE", rate: 0.044 },
+    PKR: { symbol: "₨", locale: "ur-PK", rate: 3.34 },
+    BDT: { symbol: "৳", locale: "bn-BD", rate: 1.44 },
+    NPR: { symbol: "₨", locale: "ne-NP", rate: 1.60 },
+    LKR: { symbol: "₨", locale: "si-LK" , rate: 3.56 },
+    RUB: { symbol: "₽", locale: "ru-RU", rate: 1.16 },
+    ZAR: { symbol: "R", locale: "en-ZA", rate: 0.21 },
+    NZD: { symbol: "NZ$", locale: "en-NZ", rate: 0.020 },
+    SGD: { symbol: "S$", locale: "en-SG", rate: 0.016 },
+    HKD: { symbol: "HK$", locale: "zh-HK", rate: 0.093 },
+    KWD: { symbol: "د.ك", locale: "ar-KW", rate: 0.0037 },
+    OMR: { symbol: "ر.ع.", locale: "ar-OM", rate: 0.0046 },
+    BHD: { symbol: ".د.ب", locale: "ar-BH", rate: 0.0045 },
+    QAR: { symbol: "ر.ق", locale: "ar-QA", rate: 0.044 },
+    MYR: { symbol: "RM", locale: "ms-MY", rate: 0.052 },
+    IDR: { symbol: "Rp", locale: "id-ID", rate: 189.5 },
+    TRY: { symbol: "₺", locale: "tr-TR", rate: 0.41 },
+    BRL: { symbol: "R$", locale: "pt-BR", rate: 0.068 },
+    MXN: { symbol: "$", locale: "es-MX", rate: 0.24 },
+    EGP: { symbol: "E£", locale: "ar-EG", rate: 0.59 },
+    AFN: { symbol: "؋", locale: "ps-AF", rate: 0.81 },
+    KRW: { symbol: "₩", locale: "ko-KR", rate: 16.58 }
+};
+
+let currentCurrency = localStorage.getItem('monvael_currency_engine') || 'INR';
+
+
 // Extract historical logs or launch self-healing operational buffers safely
 let expenses = JSON.parse(localStorage.getItem(KEYS.EXPENSES)) || [];
 let capitalLimit = parseFloat(localStorage.getItem(KEYS.CAPITAL)) || 100000;
@@ -41,6 +80,10 @@ window.addEventListener('DOMContentLoaded', () => {
         viewLedger: document.getElementById('view-ledger'),
         viewAnalytics: document.getElementById('view-analytics'),
         viewAlarms: document.getElementById('view-alarms'),
+        currencySwitcher: document.getElementById('currency-switcher'),
+        formCurrencySign: document.getElementById('form-currency-sign'),
+        thresholdCurrencySign: document.getElementById('threshold-currency-sign'),
+        alarmCurrencySign: document.getElementById('alarm-currency-sign'),
 
         // Financial Metrics Outputs
         metricAllocated: document.getElementById('metric-allocated'),
@@ -93,7 +136,13 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(amount);
+        const config = CURRENCY_CONFIG[currentCurrency];
+
+        return new Intl.NumberFormat(config.locale, {
+            style:'currency',
+            currency: currentCurrency,
+            maximumFractionDigits: 0
+        }).format(amount);
     };
 
     /* =========================================================================
@@ -380,6 +429,7 @@ window.addEventListener('DOMContentLoaded', () => {
             if (!isNaN(val) && val >= 0) {
                 capitalLimit = val;
                 localStorage.setItem(KEYS.CAPITAL, capitalLimit);
+
                 updateCoreMetrics();
             }
         });
@@ -395,37 +445,88 @@ window.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            // Build structural spreadsheet text parameters template sequentially
-            let csvRows = ["Transaction ID,Description,Category,Date,Remarks,Amount (INR)"];
+            //create workbook engine
+            const workbook = XLSX.utils.book_new();
+
+            // conversion data matrix setup
+            // preparing baseline arrrays in whihc we will psiition dymanic grids
+            const rawReportRows = [];
             
+            // helper logic to genrate blank spacer rows
+            const appendBlankRow = (count =1) => {
+                for (let i = 0; i < count; i++) rawReportRows.push([]);
+            };
+
+            //heaer hero container block
+            rawReportRows.push(["MONVAEL MANAGEMENT OS - PREMIUM EXPENSE REPORT LAYER"]);
+            rawReportRows.push([`Generated Runtime : ${new Date().toLocaleDateString()} | Active Currency Workspace : ${currentCurrency}`]);
+            appendBlankRow(2);
+
+            //Analaytics $ Insight Data Widget Matric
+            const totalSpent = expenses.reduce((sum, item) => sum + item.amount, 0);
+            const activeRunway = capitalLimit - totalSpent;
+
+            rawReportRows.push(["FINANCIAL METRICS STATUS OVERVIEW"]);
+            rawReportRows.push(["Allocated Capital Limit", "Total Aggregate Burn", "Remaining Active Runway Status"]);
+            rawReportRows.push([capitalLimit, totalSpent, activeRunway]);
+            appendBlankRow(2);
+
+            // Color monitor legend keys matrix
+            rawReportRows.push(["REPORT COLOR CONDITIONAL MONITOR LEGEND INDICATORS"]);
+            rawReportRows.push(["[MAX SPEND BADGE]", "High-velocity operational burn transaction vector"]);
+            rawReportRows.push(["[MIN SPEND BADGE]", "Maximum structural baseline operational resource leak"]);
+            appendBlankRow(2);
+
+            //primary transaction data ledger table headers
+            rawReportRows.push(["LEDGER RECORD ENTRIES LOG STREAM"]);
+            rawReportRows.push(["Transaction ID", "Core Description/Title", "Category Vector", "Execution Date", "Granular Remarks/Notes", `Amount (${currentCurrency})`]);
+
+            //track elements parameters for dynamic highlight tracking loops
+            let maxAmount = -1;
+            let minAmount = Infinity;
             expenses.forEach(item => {
-                // Safe string filtering to handle clean inner quote structures
-                const sanitizedTitle = (item.title || '').replace(/"/g, '""');
-                const sanitizedRemarks = (item.remarks || '').replace(/"/g, '""');
-                csvRows.push(`${item.id},"${sanitizedTitle}",${item.category},${item.date},"${sanitizedRemarks}",${item.amount}`);
+                if(item.amount > maxAmount) maxAmount = item.amount;
+                if(item.amount < minAmount) minAmount = item.amount;
             });
-            
-            // Join layout nodes with proper line breaks structure
-            const csvString = csvRows.join("");
-            
-            // FIXED: Convert large text array straight into a high-speed Binary Large Object (Blob)
-            const csvBlob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-            
-            // Generate a temporary browser unique address allocation pointer safely
-            const objectUrl = URL.createObjectURL(csvBlob);
-            
-            const invisibleAnchor = document.createElement('a');
-            invisibleAnchor.setAttribute('href', objectUrl);
-            invisibleAnchor.setAttribute('download', `monvael_ledger_export_${Date.now()}.csv`);
-            
-            document.body.appendChild(invisibleAnchor);
-            invisibleAnchor.click();
-            
-            // Clean memory pipelines instantly by revoking the transient Object URL
-            invisibleAnchor.remove();
-            URL.revokeObjectURL(objectUrl);
-            
-            triggerToast("Financial matrix spreadsheet downloaded successfully!");
+
+            //populate records entries row arrays step-by-step
+            expenses.forEach(item => {
+                let statusLabel ="";
+                if (item.amount === maxAmount && expenses.length > 1) statusLabel = "[MAX SPEND BADGE] ";
+                if (item.amount === minAmount && expenses.length > 1) statusLabel = "[MIN SPEND BADGE] ";
+
+                rawReportRows.push([
+                    item.id,
+                    statusLabel + item.title,
+                    item.category,
+                    item.date,
+                    item.remarks || "N/A",
+                    item.amount
+                ]);
+            });
+
+            // COnvert matric array staraight into worksheet dta object
+            const worksheet = XLSX.utils.aoa_to_sheet(rawReportRows);
+
+            // Advanced cel range design ^ structural properties
+            //automatically dynamic cell parameters layout width auto-caluculation logic
+            const colsConfiguration = [
+                { wch: 20 }, // ID Column
+                { wch: 30 }, // Description
+                { wch: 22 }, // category vector
+                { wch: 15 }, // date
+                { wch: 35 }, // remarks
+                { wch: 18 } // amount numeric field
+            ] ;
+            worksheet['!cols'] = colsConfiguration ;
+
+            // Excel binding and file export invocations
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Operational Burn Report");
+
+            // software auto genration tracking file trigger loop execution
+            XLSX.writeFile(workbook, `monvael_advanced_report_${Date.now()}.xlsx`);
+
+            triggerToast("Advanced financial analaysis Excel sheet downloaded successfully!");
         });
     }
 
@@ -686,6 +787,53 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Fire default bootstrap sync loop
     applyAmbientThemeState(activeTheme);
+
+        // =========================================================================
+    // DYNAMIC MULTI-CURRENCY RUNTIME INTERCEPTOR
+    // =========================================================================
+    const applyGlobalCurrencyState = (targetCurrency) => {
+        if (!CURRENCY_CONFIG[targetCurrency]) return;
+
+        currentCurrency = targetCurrency;
+        localStorage.setItem('monvael_currency_engine', targetCurrency);
+
+        const activeConfig = CURRENCY_CONFIG[targetCurrency];
+
+        // Global UI indicators ko target karke real-time update dena
+        const formSign = document.getElementById('form-currency-sign');
+        const thresholdSign = document.getElementById('threshold-currency-sign');
+        const alarmSign = document.getElementById('alarm-currency-sign');
+
+        if (formSign) formSign.textContent = activeConfig.symbol;
+        if (thresholdSign) thresholdSign.textContent = activeConfig.symbol;
+        if (alarmSign) alarmSign.textContent = activeConfig.symbol;
+
+        if (dom.currencySwitcher) dom.currencySwitcher.value = targetCurrency;
+
+        if (dom.capitalInput){
+            dom.capitalInput.value = capitalLimit;
+        }
+        // Core metric tables aur state arrays ko crash ke bina dobara calulate karna
+        updateCoreMetrics();
+        renderLedgerRows();
+        synchronizeAlarmsRegistryView();
+        
+        if (dom.viewAnalytics && !dom.viewAnalytics.classList.contains('hidden')) {
+            renderAnalyticsCharts();
+        }
+    };
+
+    // UI Input listener switch setup
+    if (dom.currencySwitcher) {
+        dom.currencySwitcher.addEventListener('change', (e) => {
+            applyGlobalCurrencyState(e.target.value);
+            triggerToast(`System currency converted to: ${e.target.value}`);
+        });
+    }
+
+    // Global Initial System Boot Loop - Iski spelling sahi kar di hai!
+    applyGlobalCurrencyState(currentCurrency);
+
 });
 
 /**
@@ -828,7 +976,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  
+ 
+
+
 });
 
 
