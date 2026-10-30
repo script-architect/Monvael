@@ -141,6 +141,7 @@ window.addEventListener('DOMContentLoaded', () => {
         return new Intl.NumberFormat(config.locale, {
             style:'currency',
             currency: currentCurrency,
+            currencyDisplay: 'narrowSymbol',
             maximumFractionDigits: 0
         }).format(amount);
     };
